@@ -1,135 +1,145 @@
-import React from 'react'
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 const SignUpScreen = () => {
+  const [loginRedirect, setLoginRedirect] = useState(false);
   return (
     <>
-      {' '}
-      <div className='hero-wrap ftco-degree-bg'>
-        <div className='container register'>
-          <div className='row'>
-            <div className='col-md-3 register-left'>
-              <img src='https://image.ibb.co/n7oTvU/logo_white.png' alt='' />
-              <h3>Welcome</h3>
-              <p>You are 30 seconds away from earning your own money!</p>
-              <input type='submit' name='' value='Login' />
+      {loginRedirect && <Redirect to="/signin" />}
+      <div className="hero-wrap ftco-degree-bg">
+        <div className="container register">
+          <div className="row">
+            <div className="col-md-3 register-left">
+              <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+              <h3 className="text-light">Welcome</h3>
+
+              <p>You are 30 seconds away from getting your own car!</p>
+              <input
+                type="submit"
+                name=""
+                value="Login"
+                onClick={() => {
+                  setLoginRedirect(true);
+                }}
+              />
               <br />
             </div>
-            <div className='col-md-9 register-right'>
+            <div className="col-md-9 register-right">
               <ul
-                className='nav nav-tabs nav-justified'
-                id='myTab'
-                role='tablist'
+                className="nav nav-tabs nav-justified"
+                id="myTab"
+                role="tablist"
               >
-                <li className='nav-item'>
+                <li className="nav-item">
                   <a
-                    className='nav-link active'
-                    id='home-tab'
-                    data-toggle='tab'
-                    href='#home'
-                    role='tab'
-                    aria-controls='home'
-                    aria-selected='true'
+                    className="nav-link active"
+                    id="home-tab"
+                    data-toggle="tab"
+                    href="#home"
+                    role="tab"
+                    aria-controls="home"
+                    aria-selected="true"
                   >
                     Employee
                   </a>
                 </li>
-                <li className='nav-item'>
+                <li className="nav-item">
                   <a
-                    className='nav-link'
-                    id='profile-tab'
-                    data-toggle='tab'
-                    href='#profile'
-                    role='tab'
-                    aria-controls='profile'
-                    aria-selected='false'
+                    className="nav-link"
+                    id="profile-tab"
+                    data-toggle="tab"
+                    href="#profile"
+                    role="tab"
+                    aria-controls="profile"
+                    aria-selected="false"
                   >
                     Hirer
                   </a>
                 </li>
               </ul>
-              <div className='tab-content' id='myTabContent'>
+              <div className="tab-content" id="myTabContent">
                 <div
-                  className='tab-pane fade show active'
-                  id='home'
-                  role='tabpanel'
-                  aria-labelledby='home-tab'
+                  className="tab-pane fade show active"
+                  id="home"
+                  role="tabpanel"
+                  aria-labelledby="home-tab"
                 >
-                  <h3 className='register-heading'>Apply as a Employee</h3>
-                  <div className='row register-form'>
-                    <div className='col-md-6'>
-                      <div className='form-group'>
+                  <h3 className="register-heading">Apply as a Employee</h3>
+                  <div className="row register-form">
+                    <div className="col-md-6">
+                      <div className="form-group">
                         <input
-                          type='text'
-                          className='form-control'
-                          placeholder='First Name *'
-                          value=''
+                          type="text"
+                          className="form-control"
+                          placeholder="First Name *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='text'
-                          className='form-control'
-                          placeholder='Last Name *'
-                          value=''
+                          type="text"
+                          className="form-control"
+                          placeholder="Last Name *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='password'
-                          className='form-control'
-                          placeholder='Password *'
-                          value=''
+                          type="password"
+                          className="form-control"
+                          placeholder="Password *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='password'
-                          className='form-control'
-                          placeholder='Confirm Password *'
-                          value=''
+                          type="password"
+                          className="form-control"
+                          placeholder="Confirm Password *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
-                        <div className='maxl'>
-                          <label className='radio inline m-2'>
+                      <div className="form-group">
+                        <div className="maxl">
+                          <label className="radio inline m-2">
                             <input
-                              type='radio'
-                              name='gender'
-                              value='male'
+                              type="radio"
+                              name="gender"
+                              value="male"
                               checked
                             />
                             <span> Male </span>
                           </label>
-                          <label className='radio inline m-2'>
-                            <input type='radio' name='gender' value='female' />
+                          <label className="radio inline m-2">
+                            <input type="radio" name="gender" value="female" />
                             <span> Female </span>
                           </label>
                         </div>
                       </div>
                     </div>
-                    <div className='col-md-6'>
-                      <div className='form-group'>
+                    <div className="col-md-6">
+                      <div className="form-group">
                         <input
-                          type='email'
-                          className='form-control'
-                          placeholder='Your Email *'
-                          value=''
+                          type="email"
+                          className="form-control"
+                          placeholder="Your Email *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='text'
-                          minlength='10'
-                          maxlength='10'
-                          name='txtEmpPhone'
-                          className='form-control'
-                          placeholder='Your Phone *'
-                          value=''
+                          type="text"
+                          minlength="10"
+                          maxlength="10"
+                          name="txtEmpPhone"
+                          className="form-control"
+                          placeholder="Your Phone *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
-                        <select className='form-control'>
-                          <option className='hidden' selected disabled>
+                      <div className="form-group">
+                        <select className="form-control">
+                          <option className="hidden" selected disabled>
                             Please select your Sequrity Question
                           </option>
                           <option>What is your Birthdate?</option>
@@ -137,86 +147,86 @@ const SignUpScreen = () => {
                           <option>What is your Pet Name?</option>
                         </select>
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='text'
-                          className='form-control'
-                          placeholder='Enter Your Answer *'
-                          value=''
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Your Answer *"
+                          value=""
                         />
                       </div>
                       <input
-                        type='submit'
-                        className='btnRegister'
-                        value='Register'
+                        type="submit"
+                        className="btnRegister"
+                        value="Register"
                       />
                     </div>
                   </div>
                 </div>
                 <div
-                  className='tab-pane fade show'
-                  id='profile'
-                  role='tabpanel'
-                  aria-labelledby='profile-tab'
+                  className="tab-pane fade show"
+                  id="profile"
+                  role="tabpanel"
+                  aria-labelledby="profile-tab"
                 >
-                  <h3 className='register-heading'>Apply as a Hirer</h3>
-                  <div className='row register-form'>
-                    <div className='col-md-6'>
-                      <div className='form-group'>
+                  <h3 className="register-heading">Apply as a Hirer</h3>
+                  <div className="row register-form">
+                    <div className="col-md-6">
+                      <div className="form-group">
                         <input
-                          type='text'
-                          className='form-control'
-                          placeholder='First Name *'
-                          value=''
+                          type="text"
+                          className="form-control"
+                          placeholder="First Name *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='text'
-                          className='form-control'
-                          placeholder='Last Name *'
-                          value=''
+                          type="text"
+                          className="form-control"
+                          placeholder="Last Name *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='email'
-                          className='form-control'
-                          placeholder='Email *'
-                          value=''
+                          type="email"
+                          className="form-control"
+                          placeholder="Email *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='text'
-                          maxlength='10'
-                          minlength='10'
-                          className='form-control'
-                          placeholder='Phone *'
-                          value=''
+                          type="text"
+                          maxlength="10"
+                          minlength="10"
+                          className="form-control"
+                          placeholder="Phone *"
+                          value=""
                         />
                       </div>
                     </div>
-                    <div className='col-md-6'>
-                      <div className='form-group'>
+                    <div className="col-md-6">
+                      <div className="form-group">
                         <input
-                          type='password'
-                          className='form-control'
-                          placeholder='Password *'
-                          value=''
+                          type="password"
+                          className="form-control"
+                          placeholder="Password *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='password'
-                          className='form-control'
-                          placeholder='Confirm Password *'
-                          value=''
+                          type="password"
+                          className="form-control"
+                          placeholder="Confirm Password *"
+                          value=""
                         />
                       </div>
-                      <div className='form-group'>
-                        <select className='form-control'>
-                          <option className='hidden' selected disabled>
+                      <div className="form-group">
+                        <select className="form-control">
+                          <option className="hidden" selected disabled>
                             Please select your Sequrity Question
                           </option>
                           <option>What is your Birthdate?</option>
@@ -224,18 +234,18 @@ const SignUpScreen = () => {
                           <option>What is your Pet Name?</option>
                         </select>
                       </div>
-                      <div className='form-group'>
+                      <div className="form-group">
                         <input
-                          type='text'
-                          className='form-control'
-                          placeholder='`Answer *'
-                          value=''
+                          type="text"
+                          className="form-control"
+                          placeholder="`Answer *"
+                          value=""
                         />
                       </div>
                       <input
-                        type='submit'
-                        className='btnRegister'
-                        value='Register'
+                        type="submit"
+                        className="btnRegister"
+                        value="Register"
                       />
                     </div>
                   </div>
@@ -246,7 +256,7 @@ const SignUpScreen = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignUpScreen
+export default SignUpScreen;
