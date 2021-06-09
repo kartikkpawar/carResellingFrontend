@@ -7,9 +7,11 @@ import ContactScreen from "../Screens/ContactScreen";
 import AboutScreen from "../Screens/AboutScreen";
 import ServicesScreen from "../Screens/ServicesScreen";
 import BlogsScreen from "../Screens/BlogsScreen";
+import BuyerDashboard from "../Screens/Dasboard/BuyerDashboard";
 
 export const PageRoutes = [
   { path: "/services", component: ServicesScreen },
+  { path: "/dashboard", component: BuyerDashboard },
   { path: "/about", component: AboutScreen },
   { path: "/contact", component: ContactScreen },
   { path: "/cars", component: CarsScreen },

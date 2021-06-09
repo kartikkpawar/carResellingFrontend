@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { isAuthenticated, signOut } from "../Helpers/authentication";
 
-const Header = () => {
-  const history = useHistory();
+const Header = ({ history }) => {
+  const historyload = useHistory();
   const signOutUser = () => {
-    signOut(() => history.go(0));
+    signOut(() => historyload.go(0));
   };
   const [auth, setAuth] = useState(false);
 
   useEffect(() => {
     isAuthenticated() && setAuth(true);
   }, []);
+
+  const currentTab = (history, path) => {
+    if (history.location.pathname === path) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const signinStyling = (path) => {
+    if (path === "/signin" || path === "/signup") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       <nav
@@ -21,7 +38,12 @@ const Header = () => {
       >
         <div className="container">
           <a className="navbar-brand" href="/">
-            Car<span>Book</span>
+            {signinStyling(history.location.pathname) ? (
+              <span className="text-dark">Car</span>
+            ) : (
+              "Car"
+            )}
+            <span>Book</span>
           </a>
           <button
             className="navbar-toggler"
@@ -37,50 +59,117 @@ const Header = () => {
 
           <div className="collapse navbar-collapse" id="ftco-nav">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
-                <a href="/" className="nav-link">
+              <li
+                className={`nav-item ${currentTab(history, "/") && "active"}`}
+              >
+                <a
+                  href="/"
+                  className={`nav-link ${
+                    signinStyling(history.location.pathname) && "text-dark"
+                  }`}
+                >
                   Home
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/about" className="nav-link">
+              <li
+                className={`nav-item ${
+                  currentTab(history, "/about") && "active"
+                }`}
+              >
+                <a
+                  href="/about"
+                  className={`nav-link ${
+                    signinStyling(history.location.pathname) && "text-dark"
+                  }`}
+                >
                   About
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/services" className="nav-link">
+              <li
+                className={`nav-item ${
+                  currentTab(history, "/services") && "active"
+                }`}
+              >
+                <a
+                  href="/services"
+                  className={`nav-link ${
+                    signinStyling(history.location.pathname) && "text-dark"
+                  }`}
+                >
                   Services
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/pricing" className="nav-link">
-                  Pricing
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/cars" className="nav-link">
+              <li
+                className={`nav-item ${
+                  currentTab(history, "/cars") && "active"
+                }`}
+              >
+                <a
+                  href="/cars"
+                  className={`nav-link ${
+                    signinStyling(history.location.pathname) && "text-dark"
+                  }`}
+                >
                   Cars
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/blogs" className="nav-link">
+              <li
+                className={`nav-item ${
+                  currentTab(history, "/blogs") && "active"
+                }`}
+              >
+                <a
+                  href="/blogs"
+                  className={`nav-link ${
+                    signinStyling(history.location.pathname) && "text-dark"
+                  }`}
+                >
                   Blog
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/contact" className="nav-link">
+              <li
+                className={`nav-item ${
+                  currentTab(history, "/contact") && "active"
+                }`}
+              >
+                <a
+                  href="/contact"
+                  className={`nav-link ${
+                    signinStyling(history.location.pathname) && "text-dark"
+                  }`}
+                >
                   Contact
                 </a>
               </li>
-              {console.log(auth)}
               {auth ? (
                 <li className="nav-item" onClick={signOutUser}>
-                  <a className="nav-link">Sign Out</a>
+                  <a
+                    className={`nav-link ${
+                      signinStyling(history.location.pathname) && "text-dark"
+                    }`}
+                  >
+                    Sign Out
+                  </a>
                 </li>
               ) : (
-                <li className="nav-item">
+                <li
+                  className={`nav-item ${
+                    currentTab(history, "/signin") && "active"
+                  }`}
+                >
                   <a href="/signin" className="nav-link">
                     Sign-In
+                  </a>
+                </li>
+              )}
+              {auth && (
+                <li
+                  className={`nav-item ${
+                    currentTab(history, "/signin") && "active"
+                  }`}
+                >
+                  <a href="/dashboard" className="nav-link">
+                    Dashboard
                   </a>
                 </li>
               )}
@@ -92,4 +181,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

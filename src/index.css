@@ -105,3 +105,13 @@
   margin-bottom: -15%;
   color: #495057;
 }
+.dash {
+  height: 100vh;
+}
+.dash-left {
+  flex: 0.2;
+  background-color: #0062cc;
+}
+.dash-right {
+  flex: 0.8;
+}
