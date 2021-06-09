@@ -109,9 +109,40 @@
   height: 100vh;
 }
 .dash-left {
-  flex: 0.2;
+  flex: 0.15;
   background-color: #0062cc;
 }
 .dash-right {
-  flex: 0.8;
+  flex: 0.85;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.spanButton {
+  color: black;
+  height: 60px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  padding-top: 10px;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
+}
+.spanButtonActive {
+  color: #fff;
+  height: 60px;
+  background-color: #01d28e;
+  margin-bottom: 10px;
+  text-align: center;
+  padding-top: 10px;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
+}
+#disbled-input {
+  color: #5a20cb !important ;
 }
