@@ -4,8 +4,8 @@ import BuyerListBids from "./BuyerListBids";
 
 const BuyerDashboard = () => {
   const [pageRender, setPageRender] = useState({
-    profile: true,
-    bids: false,
+    profile: !true,
+    bids: !false,
   });
 
   const { profile, bids } = pageRender;
@@ -42,9 +42,9 @@ const BuyerDashboard = () => {
           </span>
         </div>
       </div>
-      <div className="dash-right">
+      <div className="dash-right position-relative">
         <h1 className="text-dark ml-3 mt-2">Welcome Kartik Pawar,</h1>
-        <div className="container">
+        <div className="container ">
           {profile && <BuyerEditProfile />}
           {bids && <BuyerListBids />}
         </div>

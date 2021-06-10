@@ -84,6 +84,7 @@ const SignUpScreen = () => {
     formData.set("address", address);
     formData.set("district", district);
     formData.set("state", state);
+    formData.set("profile", "");
     if (password === confirmPassword) {
       formData.set("password", password);
     } else {

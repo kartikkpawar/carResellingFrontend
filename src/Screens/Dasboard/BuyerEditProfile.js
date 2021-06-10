@@ -1,27 +1,36 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BiCamera } from "react-icons/bi";
+import { Redirect, useHistory } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
 import stateDistrict from "../../Assets/stateDistrict";
-import { buyerUpdate, isAuthenticated } from "../../Helpers/authentication";
+import {
+  authenticate,
+  buyerUpdate,
+  isAuthenticated,
+} from "../../Helpers/authentication";
+import { getBuyerById } from "../../Helpers/buyersAndSellers";
 
 const BuyerEditProfile = () => {
   const { user, token } = isAuthenticated();
 
-  /* FIXME make the use state and make the get buyer by id call and load the profile data and profile iamge */
+  /* FIXME PROFILE IMAGE NOT LOADING  */
+  const [rerenderProfile, setRerenderProfile] = useState(false);
 
   const [distritlist, setDistritlist] = useState([]);
+  const [redirect, setRedirect] = useState(false);
 
   const [profileData, setProfileData] = useState({
-    fname: user.name.split(" ")[0],
-    lname: user.name.split(" ")[1],
-    email: user.email,
-    contact: user.contact,
-    address: user.address,
-    state: user.state,
-    district: user.district,
-    pincode: user.pincode,
-    password: "",
-    confirmPassword: "",
+    fname: user?.name.split(" ")[0],
+    lname: user?.name.split(" ")[1],
+    email: user?.email,
+    contact: user?.contact,
+    address: user?.address,
+    state: user?.state,
+    district: user?.district,
+    pincode: user?.pincode,
+    password: "1234",
+    confirmPassword: "1234",
     gender: true,
     profile: "",
     profileUrl:
@@ -49,6 +58,26 @@ const BuyerEditProfile = () => {
       }
     });
   }, []);
+  useEffect(() => {
+    const profile =
+      isAuthenticated() && JSON.parse(localStorage.getItem("jwt"));
+    console.log(profile);
+
+    getBuyerById(user._id, token).then((data) => {
+      if (data.error) {
+        return toast.error(data.error, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+        });
+      }
+      profile.user = data;
+      authenticate(profile, () => setRedirect(true));
+    });
+  }, [rerenderProfile]);
   const districtListhelper = (event) => {
     setProfileData({ ...profileData, state: event.target.value });
     stateDistrict.states.forEach((statedata) => {
@@ -73,11 +102,19 @@ const BuyerEditProfile = () => {
       address === "" ||
       state === "" ||
       district === "" ||
-      pincode === "" ||
-      password === "" ||
-      confirmPassword === ""
+      pincode === ""
     ) {
       return toast.error("Please include all fields", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+      });
+    }
+    if (password === "" || confirmPassword === "") {
+      return toast.warning("Please enter password to confirm the changes", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -97,6 +134,8 @@ const BuyerEditProfile = () => {
     formData.set("address", address);
     formData.set("district", district);
     formData.set("state", state);
+    formData.set("profilePic", profile);
+
     if (password === confirmPassword) {
       formData.set("password", password);
     } else {
@@ -125,7 +164,9 @@ const BuyerEditProfile = () => {
             draggable: true,
           });
         }
-        console.log(data);
+        setProfileData({ ...profileData, password: "" });
+        setProfileData({ ...profileData, confirmPassword: "" });
+        setRerenderProfile(!rerenderProfile);
         return toast.success("Profile Updated Successfully", {
           position: "bottom-right",
           autoClose: 3000,
@@ -157,7 +198,7 @@ const BuyerEditProfile = () => {
     return (
       <img
         src={data}
-        alt=""
+        alt="NOT LOADING"
         style={{
           height: "150px",
           width: "150px",
@@ -294,7 +335,7 @@ const BuyerEditProfile = () => {
       <div className="row w-100 mt-4">
         <div className="col-md-6">
           <input
-            type="text"
+            type="password"
             className="form-control"
             placeholder="Password *"
             value={password}
@@ -303,7 +344,7 @@ const BuyerEditProfile = () => {
         </div>
         <div className="col-md-6">
           <input
-            type="text"
+            type="password"
             className="form-control"
             placeholder="Confirm Password *"
             value={confirmPassword}
