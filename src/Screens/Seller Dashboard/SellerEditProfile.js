@@ -8,10 +8,12 @@ import {
   authenticate,
   buyerUpdate,
   isAuthenticated,
+  sellerSignIn,
+  sellerUpdate,
 } from "../../Helpers/authentication";
-import { getBuyerById } from "../../Helpers/buyersAndSellers";
+import { getSellerById } from "../../Helpers/buyersAndSellers";
 
-const BuyerEditProfile = () => {
+const SellerEditProfile = () => {
   const { user, token } = isAuthenticated();
 
   /* FIXME PROFILE IMAGE NOT LOADING  */
@@ -63,7 +65,7 @@ const BuyerEditProfile = () => {
       isAuthenticated() && JSON.parse(localStorage.getItem("jwt"));
     console.log(profile);
 
-    getBuyerById(user._id, token).then((data) => {
+    getSellerById(user._id, token).then((data) => {
       if (data.error) {
         return toast.error(data.error, {
           position: "bottom-right",
@@ -149,10 +151,10 @@ const BuyerEditProfile = () => {
       });
     }
 
-    for (const obj of formData.entries()) {
-      console.log(obj);
-    }
-    buyerUpdate(formData, user._id, token)
+    // for (const obj of formData.entries()) {
+    //   console.log(obj);
+    // }
+    sellerUpdate(formData, user._id, token)
       .then((data) => {
         if (data.error) {
           return toast.warning(data.error, {
@@ -368,4 +370,4 @@ const BuyerEditProfile = () => {
   );
 };
 
-export default BuyerEditProfile;
+export default SellerEditProfile;

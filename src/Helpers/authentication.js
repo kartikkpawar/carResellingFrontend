@@ -1,7 +1,8 @@
 const API = process.env.REACT_APP_API;
 
 export const sellerSignIn = (user) => {
-  return fetch(`${API}/seller/signin`, {
+  console.log("HITTING HERE");
+  return fetch(`${API}/signin/seller`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -15,7 +16,7 @@ export const sellerSignIn = (user) => {
     .catch((err) => console.log(err));
 };
 export const buyerSignIn = (user) => {
-  return fetch(`${API}/buyer/signin`, {
+  return fetch(`${API}/signin/buyer`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -82,31 +83,7 @@ export const signOut = (next) => {
     .catch((err) => console.log(err));
 };
 
-// Update Routess
-
-export const getSeller = (id, token) => {
-  return fetch(`${API}/seller/${id}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .catch((error) => console.log(error));
-};
-export const getBuyer = (id, token) => {
-  return fetch(`${API}/buyer/${id}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .catch((error) => console.log(error));
-};
-
+// Update Routes
 export const sellerUpdate = (seller, id, token) => {
   return fetch(`${API}/seller/${id}/update`, {
     method: "PUT",

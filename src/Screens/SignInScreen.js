@@ -18,7 +18,7 @@ const SignInScreen = () => {
     // password: "1234",
 
     //NOTE Default Buyer Login later remove this
-    email: "buyer@buyer.com",
+    email: "seller@seller.com",
     password: "1234",
   });
   const { email, password } = authFields;
@@ -36,39 +36,37 @@ const SignInScreen = () => {
         draggable: true,
       });
     }
-    buyer &&
-      buyerSignIn(user)
-        .then((data) => {
-          if (data.error) {
-            return toast.warning(data.error, {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-            });
-          }
-          authenticate(data, () => history.push("/"));
-        })
-        .catch((err) => console.log(err));
-
-    !buyer &&
-      sellerSignIn(user)
-        .then((data) => {
-          if (data.error) {
-            return toast.warning(data.error, {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-            });
-          }
-          authenticate(data, () => history.push("/"));
-        })
-        .catch((err) => console.log(err));
+    buyer
+      ? buyerSignIn(user)
+          .then((data) => {
+            if (data.error) {
+              return toast.warning(data.error, {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+              });
+            }
+            authenticate(data, () => history.push("/"));
+          })
+          .catch((err) => console.log(err))
+      : sellerSignIn(user)
+          .then((data) => {
+            if (data.error) {
+              return toast.warning(data.error, {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+              });
+            }
+            authenticate(data, () => history.push("/"));
+          })
+          .catch((err) => console.log(err));
   };
 
   const inputChange = (name) => (event) => {

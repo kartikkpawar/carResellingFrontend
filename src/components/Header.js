@@ -3,6 +3,7 @@ import { useHistory, withRouter } from "react-router-dom";
 import { isAuthenticated, signOut } from "../Helpers/authentication";
 
 const Header = ({ history }) => {
+  const { user } = isAuthenticated();
   const historyload = useHistory();
   const signOutUser = () => {
     signOut(() => historyload.go(0));
@@ -141,6 +142,22 @@ const Header = ({ history }) => {
                   Contact
                 </a>
               </li>
+              {auth && (
+                <li
+                  className={`nav-item ${
+                    currentTab(history, "/dashboard") && "active"
+                  }`}
+                >
+                  <a
+                    href={`${
+                      user.role === 0 ? "/dashboard-buyer" : "/dashboard-seller"
+                    }`}
+                    className="nav-link"
+                  >
+                    Dashboard
+                  </a>
+                </li>
+              )}
               {auth ? (
                 <li className="nav-item" onClick={signOutUser}>
                   <a
@@ -159,17 +176,6 @@ const Header = ({ history }) => {
                 >
                   <a href="/signin" className="nav-link">
                     Sign-In
-                  </a>
-                </li>
-              )}
-              {auth && (
-                <li
-                  className={`nav-item ${
-                    currentTab(history, "/signin") && "active"
-                  }`}
-                >
-                  <a href="/dashboard" className="nav-link">
-                    Dashboard
                   </a>
                 </li>
               )}

@@ -146,3 +146,6 @@
 #disbled-input {
   color: #5a20cb !important ;
 }
+#hideScroll::-webkit-scrollbar {
+  display: none;
+}

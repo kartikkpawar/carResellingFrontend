@@ -8,14 +8,16 @@ import AboutScreen from "../Screens/AboutScreen";
 import ServicesScreen from "../Screens/ServicesScreen";
 import BlogsScreen from "../Screens/BlogsScreen";
 import BuyerDashboard from "../Screens/Dasboard/BuyerDashboard";
+import SellerDashboard from "../Screens/Seller Dashboard/Sellerdashboard";
 
 export const PageRoutes = [
   { path: "/services", component: ServicesScreen },
-  { path: "/dashboard", component: BuyerDashboard },
+  { path: "/dashboard-buyer", component: BuyerDashboard },
+  { path: "/dashboard-seller", component: SellerDashboard },
   { path: "/about", component: AboutScreen },
   { path: "/contact", component: ContactScreen },
   { path: "/cars", component: CarsScreen },
-  { path: "/car", component: CarScreen },
+  { path: "/car-details", component: CarScreen },
   { path: "/signup", component: SignUpScreen },
   { path: "/signin", component: SignInScreen },
   { path: "/blogs", component: BlogsScreen },

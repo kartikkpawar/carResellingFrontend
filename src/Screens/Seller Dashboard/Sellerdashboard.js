@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 import { Redirect } from "react-router-dom";
 import { isAuthenticated } from "../../Helpers/authentication";
-import BuyerEditProfile from "./BuyerEditProfile";
-import BuyerListBids from "./BuyerListBids";
+import SellerAddCar from "./SellerAddCar";
+import SellerEditProfile from "./SellerEditProfile";
+import SellerManagecar from "./SellerManagecar";
 
-const BuyerDashboard = () => {
+const SellerDashboard = () => {
   const [pageRender, setPageRender] = useState({
-    profile: true,
-    bids: false,
+    profile: !true,
+    addCar: false,
+    listCars: !false,
   });
   const [makeRedirect, setMakeRedirect] = useState(false);
 
-  const { profile, bids } = pageRender;
+  const { profile, addCar, listCars } = pageRender;
 
   return (
     <div className="hero-wrap d-flex dash">
@@ -32,18 +34,41 @@ const BuyerDashboard = () => {
           <span
             className={`${profile ? "spanButtonActive" : "spanButton"}`}
             onClick={() => {
-              setPageRender({ ...pageRender, profile: true, bids: false });
+              setPageRender({
+                ...pageRender,
+                profile: true,
+                addCar: false,
+                listCars: false,
+              });
             }}
           >
             Profile
           </span>
           <span
-            className={`${bids ? "spanButtonActive" : "spanButton"}`}
+            className={`${addCar ? "spanButtonActive" : "spanButton"}`}
             onClick={() => {
-              setPageRender({ ...pageRender, profile: false, bids: true });
+              setPageRender({
+                ...pageRender,
+                profile: false,
+                addCar: true,
+                listCars: false,
+              });
             }}
           >
-            My Bids
+            Add Car
+          </span>{" "}
+          <span
+            className={`${listCars ? "spanButtonActive" : "spanButton"}`}
+            onClick={() => {
+              setPageRender({
+                ...pageRender,
+                profile: false,
+                addCar: false,
+                listCars: true,
+              });
+            }}
+          >
+            Manage Cars
           </span>
         </div>
 
@@ -66,12 +91,13 @@ const BuyerDashboard = () => {
           Welcome {isAuthenticated().user.name},
         </h1>
         <div className="container">
-          {profile && <BuyerEditProfile />}
-          {bids && <BuyerListBids />}
+          {profile && <SellerEditProfile />}
+          {addCar && <SellerAddCar />}
+          {listCars && <SellerManagecar />}
         </div>
       </div>
     </div>
   );
 };
 
-export default BuyerDashboard;
+export default SellerDashboard;

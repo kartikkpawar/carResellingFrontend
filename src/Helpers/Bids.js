@@ -48,3 +48,16 @@ export const bidInfo = (id) => {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
+export const deleteBidInfo = (id, token) => {
+  console.log(id);
+
+  return fetch(`${API}/deleteBid/${id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
