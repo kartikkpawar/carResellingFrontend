@@ -6,10 +6,16 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Currency from "react-currency-formatter";
 import { Link } from "@material-ui/core";
+import { isAuthenticated } from "../Helpers/authentication";
+import { bidderData, carBids, makeRequest } from "../Helpers/Bids";
+import { toast, ToastContainer } from "react-toastify";
+import moment from "moment";
 
 const CarScreen = () => {
+  const { user, token } = isAuthenticated();
   const location = useLocation();
-  const history = useHistory();
+  const [bids, setBids] = useState([]);
+
   const [makeredirect, setMakeredirect] = useState(false);
   const [carRow, setCarRow] = useState([]);
   const [carInfo, setCarInfo] = useState();
@@ -30,6 +36,13 @@ const CarScreen = () => {
     onBoardComp: false,
     climateControl: Math.random() >= 0.5,
   });
+
+  const [bidData, setBidData] = useState({
+    message: "",
+    amount: "",
+    owner: "",
+  });
+  const { message, amount } = bidData;
   const {
     airCondition,
     childSeat,
@@ -48,6 +61,8 @@ const CarScreen = () => {
     climateControl,
   } = funInfo;
 
+  const [bidderInfo, setBidderInfo] = useState("");
+
   useEffect(() => {
     if (!location.state) {
       return setMakeredirect(true);
@@ -55,7 +70,72 @@ const CarScreen = () => {
     const { carRow, car } = location.state;
     setCarInfo(car);
     setCarRow(carRow);
+
+    carBids(car._id)
+      .then((data) => {
+        if (data.error) {
+          return setBids([]);
+        }
+        return setBids(data);
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+  const bidHelper = (name) => (event) => {
+    const value = event.target.value;
+    setBidData({ ...bidData, [name]: value });
+  };
+
+  const handelSubmit = () => {
+    const bid = {
+      message,
+      amount,
+      carowner: carInfo?.owner,
+      buyername: user.name,
+      carname: carInfo.carName,
+    };
+    makeRequest(carInfo._id, token, user._id, bid)
+      .then((data) => {
+        console.log(data);
+        if (data.error) {
+          return toast.warning("Something went wrong please try again later", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+          });
+        }
+        return toast.success("Request made sucessfully", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getBidderinfo = (id, amount) => {
+    bidderData(id)
+      .then((data) => {
+        if (data.error) {
+          return toast.warning("Something went wrong", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+          });
+        }
+        setBidderInfo({ data, amount });
+      })
+      .catch();
+  };
 
   return (
     <>
@@ -70,7 +150,7 @@ const CarScreen = () => {
           <div className="overlay"></div>
           <div className="container">
             <div className="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-              <div className="col-md-9 ftco-animate pb-5">
+              <div className="col-md-9  pb-5">
                 <p className="breadcrumbs">
                   <span className="mr-2">
                     <a href="/">
@@ -109,7 +189,7 @@ const CarScreen = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md d-flex align-self-stretch ftco-animate">
+              <div className="col-md d-flex align-self-stretch ">
                 <div className="media block-6 services">
                   <div className="media-body py-md-4">
                     <div className="d-flex mb-3 align-items-center">
@@ -126,7 +206,7 @@ const CarScreen = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md d-flex align-self-stretch ftco-animate">
+              <div className="col-md d-flex align-self-stretch ">
                 <div className="media block-6 services">
                   <div className="media-body py-md-4">
                     <div className="d-flex mb-3 align-items-center">
@@ -143,7 +223,7 @@ const CarScreen = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md d-flex align-self-stretch ftco-animate">
+              <div className="col-md d-flex align-self-stretch ">
                 <div className="media block-6 services">
                   <div className="media-body py-md-4">
                     <div className="d-flex mb-3 align-items-center">
@@ -160,7 +240,7 @@ const CarScreen = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md d-flex align-self-stretch ftco-animate">
+              <div className="col-md d-flex align-self-stretch ">
                 <div className="media block-6 services">
                   <div className="media-body py-md-4">
                     <div className="d-flex mb-3 align-items-center">
@@ -179,7 +259,7 @@ const CarScreen = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md d-flex align-self-stretch ftco-animate">
+              <div className="col-md d-flex align-self-stretch ">
                 <div className="media block-6 services">
                   <div className="media-body py-md-4">
                     <div className="d-flex mb-3 align-items-center">
@@ -232,19 +312,36 @@ const CarScreen = () => {
                           Description
                         </a>
                       </li>
-                      <li className="nav-item">
-                        <a
-                          className="nav-link"
-                          id="pills-review-tab"
-                          data-toggle="pill"
-                          href="#pills-review"
-                          role="tab"
-                          aria-controls="pills-review"
-                          aria-expanded="true"
-                        >
-                          Review
-                        </a>
-                      </li>
+                      {user?.role === 1 && (
+                        <li className="nav-item">
+                          <a
+                            className="nav-link"
+                            id="pills-review-tab"
+                            data-toggle="pill"
+                            href="#pills-review"
+                            role="tab"
+                            aria-controls="pills-review"
+                            aria-expanded="true"
+                          >
+                            Requests
+                          </a>
+                        </li>
+                      )}
+                      {user?.role === 0 && (
+                        <li className="nav-item">
+                          <a
+                            className="nav-link"
+                            id="pills-review-tab"
+                            data-toggle="pill"
+                            href="#make-request"
+                            role="tab"
+                            aria-controls="pills-review"
+                            aria-expanded="true"
+                          >
+                            Make Request
+                          </a>
+                        </li>
+                      )}
                     </ul>
                   </div>
 
@@ -450,175 +547,117 @@ const CarScreen = () => {
                     >
                       <div className="row">
                         <div className="col-md-7">
-                          <h3 className="head">23 Reviews</h3>
-                          <div className="review d-flex">
+                          <h3 className="head">
+                            {bids.length} Request for the car
+                          </h3>
+                          {bids?.map((bid) => (
                             <div
-                              className="user-img"
-                              style={{
-                                backgroundImage: `url(assets/images/person_1.jpg)`,
-                              }}
-                            ></div>
-                            <div className="desc">
-                              <h4>
-                                <span className="text-left">Jacob Webb</span>
-                                <span className="text-right">
-                                  14 March 2018
-                                </span>
-                              </h4>
-                              <p className="star">
-                                <span>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                </span>
-                                <span className="text-right">
-                                  <a href="#" className="reply">
-                                    <i className="icon-reply"></i>
-                                  </a>
-                                </span>
-                              </p>
-                              <p>
-                                When she reached the first hills of the Italic
-                                Mountains, she had a last view back on the
-                                skyline of her hometown Bookmarksgrov
-                              </p>
+                              className="review d-flex"
+                              onClick={() => getBidderinfo(bid._id, bid.amount)}
+                            >
+                              <div
+                                className="user-img"
+                                style={{
+                                  backgroundImage: `url(assets/images/person_2.jpg)`,
+                                }}
+                              ></div>
+                              <div className="desc">
+                                <h4>
+                                  <span className="text-left">
+                                    {bid.buyername}
+                                  </span>
+                                  <span className="text-right">
+                                    {moment(bid.createdAt).format(
+                                      "DD MMMM YYYY"
+                                    )}
+                                  </span>
+                                </h4>
+
+                                <p>{bid.message}</p>
+                              </div>
                             </div>
-                          </div>
-                          <div className="review d-flex">
-                            <div
-                              className="user-img"
-                              style={{
-                                backgroundImage: `url(assets/images/person_2.jpg)`,
-                              }}
-                            ></div>
-                            <div className="desc">
-                              <h4>
-                                <span className="text-left">Jacob Webb</span>
-                                <span className="text-right">
-                                  14 March 2018
-                                </span>
-                              </h4>
-                              <p className="star">
-                                <span>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                </span>
-                                <span className="text-right">
-                                  <a href="#" className="reply">
-                                    <i className="icon-reply"></i>
-                                  </a>
-                                </span>
-                              </p>
-                              <p>
-                                When she reached the first hills of the Italic
-                                Mountains, she had a last view back on the
-                                skyline of her hometown Bookmarksgrov
-                              </p>
-                            </div>
-                          </div>
-                          <div className="review d-flex">
-                            <div
-                              className="user-img"
-                              style={{
-                                backgroundImage: `url(assets/images/person_3.jpg)`,
-                              }}
-                            ></div>
-                            <div className="desc">
-                              <h4>
-                                <span className="text-left">Jacob Webb</span>
-                                <span className="text-right">
-                                  14 March 2018
-                                </span>
-                              </h4>
-                              <p className="star">
-                                <span>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                </span>
-                                <span className="text-right">
-                                  <a href="#" className="reply">
-                                    <i className="icon-reply"></i>
-                                  </a>
-                                </span>
-                              </p>
-                              <p>
-                                When she reached the first hills of the Italic
-                                Mountains, she had a last view back on the
-                                skyline of her hometown Bookmarksgrov
-                              </p>
-                            </div>
-                          </div>
+                          ))}
                         </div>
-                        <div className="col-md-5">
-                          <div className="rating-wrap">
-                            <h3 className="head">Give a Review</h3>
-                            <div className="wrap">
-                              <p className="star">
-                                <span>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  (98%)
-                                </span>
-                                <span>20 Reviews</span>
-                              </p>
-                              <p className="star">
-                                <span>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  (85%)
-                                </span>
-                                <span>10 Reviews</span>
-                              </p>
-                              <p className="star">
-                                <span>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  (70%)
-                                </span>
-                                <span>5 Reviews</span>
-                              </p>
-                              <p className="star">
-                                <span>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  (10%)
-                                </span>
-                                <span>0 Reviews</span>
-                              </p>
-                              <p className="star">
-                                <span>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  <i className="ion-ios-star"></i>
-                                  (0%)
-                                </span>
-                                <span>0 Reviews</span>
-                              </p>
+                        {bidderInfo !== "" && (
+                          <div className="col-md-5">
+                            <div className="img rounded  d-flex justify-content-center ">
+                              {" "}
+                              <img
+                                className="img rounded-circle"
+                                style={{ height: "150px", width: "150px" }}
+                                src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                alt=""
+                              />
+                            </div>
+                            <div className="container d-flex justify-content-center mt-5">
+                              <span className="display-4 text-dark">
+                                {bidderInfo?.data?.name}
+                              </span>{" "}
+                            </div>{" "}
+                            <div className="container mt-2 d-flex justify-content-center">
+                              <span className="display-4 text-dark text-center">
+                                <Currency
+                                  currency="INR"
+                                  quantity={bidderInfo?.amount}
+                                />
+                              </span>{" "}
+                            </div>{" "}
+                            <div className="container mt-2 d-flex align-items-center flex-column">
+                              <span className="lead text-dark">
+                                {bidderInfo?.data?.email}
+                              </span>{" "}
+                              <span className="lead text-dark">
+                                {bidderInfo?.data?.contact}
+                              </span>{" "}
+                            </div>{" "}
+                            <div className="container mt-2 d-flex align-items-center flex-column">
+                              <span className="lead text-dark  text-start">
+                                I am from,
+                              </span>{" "}
+                              <span className="lead text-dark  text-start">
+                                {bidderInfo?.data?.state},{"  "}
+                                {bidderInfo?.data?.district}
+                              </span>{" "}
                             </div>
                           </div>
+                        )}
+                      </div>
+                    </div>
+                    {/* TODO */}
+                    <div
+                      className="tab-pane fade"
+                      id="make-request"
+                      role="tabpanel"
+                      aria-labelledby="pills-review-tab"
+                    >
+                      <div className="row">
+                        <div className="col">
+                          {" "}
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Message for request *"
+                            value={message}
+                            onChange={bidHelper("message")}
+                          />
                         </div>
+                        <div className="col">
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="Amount you request car for *"
+                            value={amount}
+                            onChange={bidHelper("amount")}
+                          />
+                        </div>
+                      </div>
+                      <div className="row  d-flex justify-content-center align-items-center">
+                        <input
+                          type="submit"
+                          className="btn btn-success mt-5 "
+                          value="Make Request"
+                          onClick={handelSubmit}
+                        />
                       </div>
                     </div>
                   </div>
@@ -631,13 +670,13 @@ const CarScreen = () => {
         <section className="ftco-section ftco-no-pt">
           <div className="container">
             <div className="row justify-content-center">
-              <div className="col-md-12 heading-section text-center ftco-animate mb-5">
+              <div className="col-md-12 heading-section text-center  mb-5">
                 <span className="subheading">Choose Car</span>
                 <h2 className="mb-2">Related Cars</h2>
               </div>
             </div>
             <div className="row">
-              {carRow.map((rowcar, idx) => (
+              {carRow?.map((rowcar, idx) => (
                 <div className="col-md-4" key={idx}>
                   <div className="car-wrap rounded ">
                     <img
@@ -677,6 +716,8 @@ const CarScreen = () => {
         </section>
       </>
       <Footer />
+
+      <ToastContainer />
     </>
   );
 };

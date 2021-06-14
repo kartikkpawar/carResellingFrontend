@@ -9,11 +9,13 @@ import ServicesScreen from "../Screens/ServicesScreen";
 import BlogsScreen from "../Screens/BlogsScreen";
 import BuyerDashboard from "../Screens/Dasboard/BuyerDashboard";
 import SellerDashboard from "../Screens/Seller Dashboard/Sellerdashboard";
+import Admindashboard from "../Screens/Admin Dashboard/Admindashboard";
 
 export const PageRoutes = [
   { path: "/services", component: ServicesScreen },
   { path: "/dashboard-buyer", component: BuyerDashboard },
   { path: "/dashboard-seller", component: SellerDashboard },
+  { path: "/dashboard-admin", component: Admindashboard },
   { path: "/about", component: AboutScreen },
   { path: "/contact", component: ContactScreen },
   { path: "/cars", component: CarsScreen },

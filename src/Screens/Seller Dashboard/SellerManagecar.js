@@ -60,6 +60,9 @@ const SellerManagecar = () => {
               </th>
               <th scope="col" className="text-center">
                 Expected Cost
+              </th>{" "}
+              <th scope="col" className="text-center">
+                Sold Status
               </th>
               <th scope="col" className="text-center">
                 Edit
