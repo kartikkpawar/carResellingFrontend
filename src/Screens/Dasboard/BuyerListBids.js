@@ -82,7 +82,12 @@ const BuyerListBids = () => {
                 </td>
                 <td
                   className="text-center"
-                  onClick={() => history.push(`/car/${bid.car}`)}
+                  onClick={() =>
+                    history.push({
+                      pathname: "/car-details",
+                      state: { car: bid.car },
+                    })
+                  }
                 >
                   <BiNavigation
                     style={{ color: "#00D84A", fontSize: "1.5rem" }}

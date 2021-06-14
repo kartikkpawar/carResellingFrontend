@@ -61,3 +61,38 @@ export const deleteBidInfo = (id, token) => {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
+
+export const makeRequest = (id, token, buyerId, data) => {
+  return fetch(`${API}/${buyerId}/sendrequest/${id}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const carBids = (id) => {
+  return fetch(`${API}/carBids/${id}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+export const bidderData = (id) => {
+  return fetch(`${API}/bidInfo/${id}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};

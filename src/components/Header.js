@@ -29,7 +29,17 @@ const Header = ({ history }) => {
       return false;
     }
   };
-
+  const roleRedirect = () => {
+    if (user.role === 0) {
+      return "/dashboard-buyer";
+    }
+    if (user.role === 1) {
+      return "/dashboard-seller";
+    }
+    if (user.role === 2) {
+      return "/dashboard-admin";
+    }
+  };
   return (
     <>
       <nav
@@ -148,12 +158,7 @@ const Header = ({ history }) => {
                     currentTab(history, "/dashboard") && "active"
                   }`}
                 >
-                  <a
-                    href={`${
-                      user.role === 0 ? "/dashboard-buyer" : "/dashboard-seller"
-                    }`}
-                    className="nav-link"
-                  >
+                  <a href={roleRedirect()} className="nav-link">
                     Dashboard
                   </a>
                 </li>

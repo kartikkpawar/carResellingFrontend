@@ -4,7 +4,7 @@ import Currency from "react-currency-formatter";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import { deleteCar } from "../Helpers/cars";
+import { deleteCar, updateSoldStatus } from "../Helpers/cars";
 import { isAuthenticated } from "../Helpers/authentication";
 import { toast } from "react-toastify";
 const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
@@ -44,6 +44,27 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
     }
   };
 
+  const updateSoldStatusHelper = (id, soldStatus) => {
+    const val = { soldStatus };
+    updateSoldStatus(id, token, user._id, val)
+      .then((data) => {
+        console.log(data);
+        if (data.error) {
+          return toast.warn("Unable to update status", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+          });
+        }
+        setDelModal(false);
+        return reRenderPage(true);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       {" "}
@@ -51,6 +72,16 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
         <td className="text-center">{idx + 1}</td>
         <td className="text-center">{car.carName}</td>
         <td className="text-center">{car.variant}</td>
+        <td className="text-center">
+          <span
+            className={`btn ${car.sold ? "btn-danger" : "btn-success"}`}
+            onClick={() => {
+              updateSoldStatusHelper(car._id, !car.sold);
+            }}
+          >
+            {car.sold ? "Sold Out" : "Not Sold"}
+          </span>
+        </td>
         <td className="text-center">
           <Currency quantity={car.cost} currency="INR" />
         </td>

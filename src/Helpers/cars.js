@@ -13,9 +13,6 @@ export const getSingleCar = (id) => {
 };
 
 export const updateSoldStatus = (id, token, sellerId, soldValue) => {
-  console.log(id);
-  console.log(token);
-  console.log(soldValue);
   return fetch(`${API}/${sellerId}/${id}/soldStatus`, {
     method: "PUT",
     headers: {
@@ -25,7 +22,10 @@ export const updateSoldStatus = (id, token, sellerId, soldValue) => {
     },
     body: JSON.stringify(soldValue),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
     .catch((error) => console.log(error));
 };
 export const getAllCars = () => {
