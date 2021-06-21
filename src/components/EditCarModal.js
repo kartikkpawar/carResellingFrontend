@@ -1,12 +1,12 @@
 import moment from "moment";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { BiCalendar, BiCamera } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { isAuthenticated } from "../Helpers/authentication";
 import { editCarData, getSingleCar } from "../Helpers/cars";
+import { getcars, getvairnats, getcompany } from "../Helpers/carcategory";
 
 const EditCarModal = ({ id, closeModal }) => {
   const [calenderVisible, setCalenderVisible] = useState(false);
@@ -54,6 +54,13 @@ const EditCarModal = ({ id, closeModal }) => {
   const handelChange = (name) => (event) => {
     const value = name === "image" ? event.target.files[0] : event.target.value;
     setCarData({ ...carData, [name]: value });
+
+    if (name === "companyName") {
+      return carListLoader(value);
+    }
+    if (name === "carName") {
+      return variantLoader(value);
+    }
   };
 
   useEffect(() => {
@@ -71,6 +78,8 @@ const EditCarModal = ({ id, closeModal }) => {
         }
 
         setCarData(data);
+        carListLoader(data.companyName);
+        variantLoader(data.carName);
         setDate(new Date(data.purchaseDate));
       })
       .catch();
@@ -162,6 +171,7 @@ const EditCarModal = ({ id, closeModal }) => {
       );
     }
     const data = `http://localhost:8000/api/car/${id}/photo`;
+
     return (
       <img
         src={data}
@@ -174,7 +184,41 @@ const EditCarModal = ({ id, closeModal }) => {
       />
     );
   };
+  const [carCompany, setCarCompany] = useState([]);
+  const [carList, setCarList] = useState([]);
+  const [varlist, setVarlist] = useState([]);
 
+  useEffect(() => {
+    getcompany()
+      .then((data) => {
+        if (data.error) {
+          return setCarCompany([]);
+        }
+        return setCarCompany(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const carListLoader = (id) => {
+    getcars(id)
+      .then((data) => {
+        if (data.error) {
+          return setCarList([]);
+        }
+        return setCarList(data);
+      })
+      .catch((err) => console.log(err));
+  };
+  const variantLoader = (id) => {
+    getvairnats(id)
+      .then((data) => {
+        if (data.error) {
+          return setVarlist([]);
+        }
+        return setVarlist(data);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <div
@@ -213,9 +257,11 @@ const EditCarModal = ({ id, closeModal }) => {
               <option className="hidden" selected disabled>
                 Please select your company
               </option>
-              <option>Toyota</option>
-              <option>BMW</option>
-              <option>Tata</option>
+              {carCompany.map((com) => (
+                <option key={com._id} value={com._id}>
+                  {com.name}
+                </option>
+              ))}
             </select>
           </div>{" "}
           <div className="col-md-4">
@@ -227,9 +273,11 @@ const EditCarModal = ({ id, closeModal }) => {
               <option className="hidden" selected disabled>
                 Please select your car name
               </option>
-              <option>Innova</option>
-              <option>E-Class</option>
-              <option>Nexon</option>
+              {carList.map((carVal) => (
+                <option key={carVal._id} value={carVal._id}>
+                  {carVal.name}
+                </option>
+              ))}
             </select>
           </div>{" "}
           <div className="col-md-4">
@@ -241,10 +289,11 @@ const EditCarModal = ({ id, closeModal }) => {
               <option className="hidden" selected disabled>
                 Please select your car variant
               </option>
-              <option>V6</option>
-              <option>V7</option>
-              <option>Z8</option>
-              <option>Z5</option>
+              {varlist.map((varientVal) => (
+                <option key={varientVal._id} value={varientVal._id}>
+                  {varientVal.name}
+                </option>
+              ))}
             </select>
           </div>
         </div>

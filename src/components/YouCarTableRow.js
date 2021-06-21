@@ -7,6 +7,7 @@ import Fade from "@material-ui/core/Fade";
 import { deleteCar, updateSoldStatus } from "../Helpers/cars";
 import { isAuthenticated } from "../Helpers/authentication";
 import { toast } from "react-toastify";
+import { getcarname, getvariantname } from "../Helpers/carcategory";
 const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
   const [delModal, setDelModal] = useState(false);
   const [carId, setCarId] = useState("");
@@ -64,14 +65,40 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
       })
       .catch((err) => console.log(err));
   };
+  const [carname, setCarname] = useState("");
+  const [varname, setVarname] = useState("");
+  const carnameHelper = () => {
+    let name = "Unable to get name";
+    getcarname(car.carName).then((data) => {
+      if (data.error) {
+        return name;
+      }
+      setCarname(data.name);
+    });
+    return name;
+  };
+  const varnameHelper = () => {
+    let name = "Unable to get name";
+    getvariantname(car.variant).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+        return name;
+      }
+      setVarname(data.name);
+    });
+
+    return name;
+  };
+  carnameHelper();
+  varnameHelper();
 
   return (
     <>
       {" "}
       <tr>
         <td className="text-center">{idx + 1}</td>
-        <td className="text-center">{car.carName}</td>
-        <td className="text-center">{car.variant}</td>
+        <td className="text-center">{carname}</td>
+        <td className="text-center">{varname}</td>
         <td className="text-center">
           <span
             className={`btn ${car.sold ? "btn-danger" : "btn-success"}`}
