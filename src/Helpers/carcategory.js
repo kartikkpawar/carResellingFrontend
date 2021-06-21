@@ -25,6 +25,7 @@ export const addcar = (data) => {
     .catch((error) => console.log(error));
 };
 export const addvariant = (data) => {
+  console.log(data);
   return fetch(`${API}/addvariant`, {
     method: "POST",
     headers: {
@@ -49,6 +50,37 @@ export const getcompany = () => {
 };
 export const getcars = (id) => {
   return fetch(`${API}/getcars/${id}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+export const getvairnats = (id) => {
+  return fetch(`${API}/getvariants/${id}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getcarname = (id) => {
+  return fetch(`${API}/getcarname/${id}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+export const getvariantname = (id) => {
+  return fetch(`${API}/getvariantname/${id}`, {
     method: "GET",
     headers: {
       Accept: "application/json",

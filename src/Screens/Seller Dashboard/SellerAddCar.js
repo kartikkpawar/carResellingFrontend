@@ -1,10 +1,11 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { BiCalendar, BiCamera } from "react-icons/bi";
 import { toast, ToastContainer } from "react-toastify";
 import { isAuthenticated } from "../../Helpers/authentication";
+import { getcars, getcompany, getvairnats } from "../../Helpers/carcategory";
 import { addCarSeller } from "../../Helpers/cars";
 
 const SellerAddCar = () => {
@@ -53,6 +54,13 @@ const SellerAddCar = () => {
   const handelChange = (name) => (event) => {
     const value = name === "image" ? event.target.files[0] : event.target.value;
     setCarData({ ...carData, [name]: value });
+
+    if (name === "companyName") {
+      return carListLoader(value);
+    }
+    if (name === "carName") {
+      return variantLoader(value);
+    }
   };
   const handelSubmit = () => {
     // NOTE send the ownerId as "owner" from user._id
@@ -155,6 +163,43 @@ const SellerAddCar = () => {
     );
   };
 
+  // NOTE the car cateory integration starts here
+  const [carCompany, setCarCompany] = useState([]);
+  const [carList, setCarList] = useState([]);
+  const [varlist, setVarlist] = useState([]);
+
+  useEffect(() => {
+    getcompany()
+      .then((data) => {
+        if (data.error) {
+          return setCarCompany([]);
+        }
+        return setCarCompany(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const carListLoader = (id) => {
+    getcars(id)
+      .then((data) => {
+        if (data.error) {
+          return setCarList([]);
+        }
+        return setCarList(data);
+      })
+      .catch((err) => console.log(err));
+  };
+  const variantLoader = (id) => {
+    getvairnats(id)
+      .then((data) => {
+        if (data.error) {
+          return setVarlist([]);
+        }
+        return setVarlist(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div
       style={{ padding: "10px" }}
@@ -191,9 +236,11 @@ const SellerAddCar = () => {
             <option className="hidden" selected disabled>
               Please select your company
             </option>
-            <option>Toyota</option>
-            <option>BMW</option>
-            <option>Tata</option>
+            {carCompany.map((com) => (
+              <option key={com._id} value={com._id}>
+                {com.name}
+              </option>
+            ))}
           </select>
         </div>{" "}
         <div className="col-md-4">
@@ -205,9 +252,11 @@ const SellerAddCar = () => {
             <option className="hidden" selected disabled>
               Please select your car name
             </option>
-            <option>Innova</option>
-            <option>E-Class</option>
-            <option>Nexon</option>
+            {carList.map((carVal) => (
+              <option key={carVal._id} value={carVal._id}>
+                {carVal.name}
+              </option>
+            ))}
           </select>
         </div>{" "}
         <div className="col-md-4">
@@ -219,10 +268,12 @@ const SellerAddCar = () => {
             <option className="hidden" selected disabled>
               Please select your car variant
             </option>
-            <option>V6</option>
-            <option>V7</option>
-            <option>Z8</option>
-            <option>Z5</option>
+
+            {varlist.map((varientVal) => (
+              <option key={varientVal._id} value={varientVal._id}>
+                {varientVal.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>
