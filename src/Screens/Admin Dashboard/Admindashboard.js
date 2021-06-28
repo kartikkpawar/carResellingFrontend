@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 import { Redirect } from "react-router-dom";
 import { isAuthenticated } from "../../Helpers/authentication";
+import Adminusers from "./Adminusers";
 import Carcategories from "./Carcategories";
 
 const Admindashboard = () => {
@@ -87,7 +88,7 @@ const Admindashboard = () => {
         <h1 className="text-dark ml-3 mt-2">Welcome Admin,</h1>
         <div className="container">
           {cars && <Carcategories />}
-          {users && <h1>usres</h1>}
+          {users && <Adminusers />}
         </div>
       </div>
     </div>

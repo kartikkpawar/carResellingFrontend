@@ -149,3 +149,54 @@
 #hideScroll::-webkit-scrollbar {
   display: none;
 }
+.sellerText {
+  color: black;
+  height: 60px;
+  background-color: #fff;
+  border: 1px solid black;
+
+  text-align: center;
+  padding-top: 10px;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
+  margin-left: 15px;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.buyerText {
+  color: black;
+  height: 60px;
+  background-color: #fff;
+  border: 1px solid black;
+
+  text-align: center;
+  padding-top: 10px;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
+  margin-right: 15px;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.textActive {
+  color: #fff;
+  height: 60px;
+  background-color: #01d28e;
+  text-align: center;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
+}

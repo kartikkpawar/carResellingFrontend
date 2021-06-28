@@ -30,7 +30,14 @@ const SellerAddCar = () => {
     milage: "",
     seats: "",
     luggage: "",
+    carId: "",
+    variantId: "",
+    companyId: "",
   });
+
+  const [tempComName, setTempComName] = useState("");
+  const [tempvarname, setTempvarname] = useState("");
+  const [tempcarName, settempcarName] = useState("");
 
   const {
     image,
@@ -49,17 +56,35 @@ const SellerAddCar = () => {
     milage,
     seats,
     luggage,
+    carId,
+    variantId,
+    companyId,
   } = carData;
 
   const handelChange = (name) => (event) => {
     const value = name === "image" ? event.target.files[0] : event.target.value;
     setCarData({ ...carData, [name]: value });
 
-    if (name === "companyName") {
+    if (name === "companyId") {
+      const carName = carCompany.filter((car) => car._id === value);
+
+      carName.length !== 0 && setTempComName(carName[0].name);
+      setCarData({ ...carData, companyId: value });
+
       return carListLoader(value);
     }
-    if (name === "carName") {
+    if (name === "carId") {
+      const carName = carList.filter((car) => car._id === value);
+
+      carName.length !== 0 && settempcarName(carName[0].name);
+      setCarData({ ...carData, carId: value });
       return variantLoader(value);
+    }
+    if (name === "variantId") {
+      const carName = varlist.filter((car) => car._id === value);
+
+      carName.length !== 0 && setTempvarname(carName[0].name);
+      setCarData({ ...carData, variantId: value });
     }
   };
   const handelSubmit = () => {
@@ -67,8 +92,14 @@ const SellerAddCar = () => {
 
     const formData = new FormData();
     formData.set("image", image);
-    formData.set("companyName", companyName);
-    formData.set("carName", carName);
+    formData.set("companyName", tempComName);
+    formData.set("carName", tempcarName);
+    formData.set("variant", tempvarname);
+    // id Setting
+    formData.set("companyId", companyId);
+    formData.set("carId", carId);
+    formData.set("variantId", variantId);
+    // id ends
     formData.set("fuel", fuel);
     formData.set("category", category);
     formData.set("description", description);
@@ -81,13 +112,14 @@ const SellerAddCar = () => {
     formData.set("seats", seats);
     formData.set("luggage", luggage);
     formData.set("mode", mode);
-    formData.set("variant", variant);
+
     formData.set("purchaseDate", date);
     formData.set("owner", user._id);
 
     for (const obj of formData.entries()) {
       console.log(obj);
     }
+
     addCarSeller(formData, user._id, token)
       .then((data) => {
         if (data.error) {
@@ -101,24 +133,30 @@ const SellerAddCar = () => {
           });
         }
 
-        setCarData({
-          image: "",
-          companyName: "",
-          carName: "",
-          fuel: "",
-          category: "",
-          description: "",
-          ownership: "",
-          cost: "",
-          kmDriven: "",
-          color: "",
-          regNumber: "",
-          mode: "",
-          variant: "",
-          milage: "",
-          seats: "",
-          luggage: "",
-        });
+        // setCarData({
+        //   image: "",
+        //   companyName: "",
+        //   carName: "",
+        //   fuel: "",
+        //   category: "",
+        //   description: "",
+        //   ownership: "",
+        //   cost: "",
+        //   kmDriven: "",
+        //   color: "",
+        //   regNumber: "",
+        //   mode: "",
+        //   variant: "",
+        //   milage: "",
+        //   seats: "",
+        //   luggage: "",
+        //   carId: "",
+        //   variantId: "",
+        //   companyId: "",
+        // });
+        // setTempComName("");
+        // settempcarName("");
+        // setTempvarname("");
         setDate(new Date());
 
         return toast.success("Car added successfully", {
@@ -230,8 +268,8 @@ const SellerAddCar = () => {
         <div className="col-md-4">
           <select
             className="form-control"
-            value={companyName}
-            onChange={handelChange("companyName")}
+            value={companyId}
+            onChange={handelChange("companyId")}
           >
             <option className="hidden" selected disabled>
               Please select your company
@@ -246,8 +284,8 @@ const SellerAddCar = () => {
         <div className="col-md-4">
           <select
             className="form-control"
-            value={carName}
-            onChange={handelChange("carName")}
+            value={carId}
+            onChange={handelChange("carId")}
           >
             <option className="hidden" selected disabled>
               Please select your car name
@@ -262,8 +300,8 @@ const SellerAddCar = () => {
         <div className="col-md-4">
           <select
             className="form-control"
-            value={variant}
-            onChange={handelChange("variant")}
+            value={variantId}
+            onChange={handelChange("variantId")}
           >
             <option className="hidden" selected disabled>
               Please select your car variant
