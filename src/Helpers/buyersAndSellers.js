@@ -28,3 +28,21 @@ export const getSellerById = (id, token) => {
     })
     .catch((err) => console.log(err));
 };
+export const getAllBuyers = () => {
+  return fetch(`${API}/getAllBuyers`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+export const getAllSellers = () => {
+  return fetch(`${API}/getAllSellers`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};

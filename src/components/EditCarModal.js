@@ -30,6 +30,9 @@ const EditCarModal = ({ id, closeModal }) => {
     milage: "",
     seats: "",
     luggage: "",
+    carId: "",
+    variantId: "",
+    companyId: "",
   });
 
   const {
@@ -49,17 +52,35 @@ const EditCarModal = ({ id, closeModal }) => {
     milage,
     seats,
     luggage,
+    carId,
+    variantId,
+    companyId,
   } = carData;
 
   const handelChange = (name) => (event) => {
     const value = name === "image" ? event.target.files[0] : event.target.value;
     setCarData({ ...carData, [name]: value });
 
-    if (name === "companyName") {
+    if (name === "companyId") {
+      const carName = carCompany.filter((car) => car._id === value);
+
+      carName.length !== 0 && setTempComName(carName[0].name);
+      setCarData({ ...carData, companyId: value });
+
       return carListLoader(value);
     }
-    if (name === "carName") {
+    if (name === "carId") {
+      const carName = carList.filter((car) => car._id === value);
+
+      carName.length !== 0 && settempcarName(carName[0].name);
+      setCarData({ ...carData, carId: value });
       return variantLoader(value);
+    }
+    if (name === "variantId") {
+      const carName = varlist.filter((car) => car._id === value);
+
+      carName.length !== 0 && setTempvarname(carName[0].name);
+      setCarData({ ...carData, variantId: value });
     }
   };
 
@@ -78,20 +99,30 @@ const EditCarModal = ({ id, closeModal }) => {
         }
 
         setCarData(data);
-        carListLoader(data.companyName);
-        variantLoader(data.carName);
+        setTempComName(data.companyName);
+        setTempvarname(data.variant);
+        settempcarName(data.carName);
+        carListLoader(data.companyId);
+        variantLoader(data.carId);
         setDate(new Date(data.purchaseDate));
       })
       .catch();
   }, []);
-
+  const [tempComName, setTempComName] = useState("");
+  const [tempvarname, setTempvarname] = useState("");
+  const [tempcarName, settempcarName] = useState("");
   const handelSubmit = () => {
     // NOTE send the ownerId as "owner" from user._id
 
     const formData = new FormData();
     formData.set("image", image);
-    formData.set("companyName", companyName);
-    formData.set("carName", carName);
+    formData.set("companyName", tempComName);
+    formData.set("carName", tempcarName);
+    formData.set("variant", tempvarname);
+    // id Setting
+    formData.set("companyId", companyId);
+    formData.set("carId", carId);
+    formData.set("variantId", variantId);
     formData.set("fuel", fuel);
     formData.set("category", category);
     formData.set("description", description);
@@ -104,7 +135,7 @@ const EditCarModal = ({ id, closeModal }) => {
     formData.set("seats", seats);
     formData.set("luggage", luggage);
     formData.set("mode", mode);
-    formData.set("variant", variant);
+
     formData.set("purchaseDate", date);
     formData.set("owner", user._id);
 
@@ -251,8 +282,8 @@ const EditCarModal = ({ id, closeModal }) => {
           <div className="col-md-4">
             <select
               className="form-control"
-              value={companyName}
-              onChange={handelChange("companyName")}
+              value={companyId}
+              onChange={handelChange("companyId")}
             >
               <option className="hidden" selected disabled>
                 Please select your company
@@ -267,8 +298,8 @@ const EditCarModal = ({ id, closeModal }) => {
           <div className="col-md-4">
             <select
               className="form-control"
-              value={carName}
-              onChange={handelChange("carName")}
+              value={carId}
+              onChange={handelChange("carId")}
             >
               <option className="hidden" selected disabled>
                 Please select your car name
@@ -283,12 +314,13 @@ const EditCarModal = ({ id, closeModal }) => {
           <div className="col-md-4">
             <select
               className="form-control"
-              value={variant}
-              onChange={handelChange("variant")}
+              value={variantId}
+              onChange={handelChange("variantId")}
             >
               <option className="hidden" selected disabled>
                 Please select your car variant
               </option>
+
               {varlist.map((varientVal) => (
                 <option key={varientVal._id} value={varientVal._id}>
                   {varientVal.name}
