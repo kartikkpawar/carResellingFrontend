@@ -55,7 +55,7 @@ const Admindashboard = () => {
           >
             Users
           </span>{" "}
-          <span
+          {/* <span
             className={`${blog ? "spanButtonActive" : "spanButton"}`}
             onClick={() => {
               setPageRender({
@@ -67,7 +67,7 @@ const Admindashboard = () => {
             }}
           >
             Add Blogs
-          </span>
+          </span> */}
         </div>
 
         <div
