@@ -10,6 +10,7 @@ import BlogsScreen from "../Screens/BlogsScreen";
 import BuyerDashboard from "../Screens/Dasboard/BuyerDashboard";
 import SellerDashboard from "../Screens/Seller Dashboard/Sellerdashboard";
 import Admindashboard from "../Screens/Admin Dashboard/Admindashboard";
+import FilterCars from "../Screens/FilterdCars";
 
 export const PageRoutes = [
   { path: "/services", component: ServicesScreen },
@@ -19,6 +20,7 @@ export const PageRoutes = [
   { path: "/about", component: AboutScreen },
   { path: "/contact", component: ContactScreen },
   { path: "/cars", component: CarsScreen },
+  { path: "/searched-cars", component: FilterCars },
   { path: "/car-details", component: CarScreen },
   { path: "/signup", component: SignUpScreen },
   { path: "/signin", component: SignInScreen },

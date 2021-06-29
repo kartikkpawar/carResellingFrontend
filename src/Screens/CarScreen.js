@@ -182,7 +182,12 @@ const CarScreen = () => {
                   </div>
 
                   <div className="text text-center">
-                    <span className="subheading">{carInfo?.companyName}</span>
+                    <span className="subheading">
+                      {carInfo?.companyName}, {carInfo?.category}
+                    </span>{" "}
+                    <span className="subheading">
+                      {carInfo?.kmDriven} Km Driven
+                    </span>
                     <h2>{carInfo?.carName}</h2>
                   </div>
                 </div>
@@ -421,8 +426,8 @@ const CarScreen = () => {
                               className={`${sleepingBed ? "check" : "remove"}`}
                             >
                               <span
-                                sleepingBed={`${
-                                  seatBelt
+                                className={`${
+                                  sleepingBed
                                     ? "ion-ios-checkmark"
                                     : "ion-ios-close"
                                 }`}

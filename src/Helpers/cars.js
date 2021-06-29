@@ -89,3 +89,15 @@ export const deleteCar = (sellerid, token, carId) => {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
+export const filterCar = (filters) => {
+  return fetch(`${API}/carFilter`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(filters),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
