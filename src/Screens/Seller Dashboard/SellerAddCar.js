@@ -133,30 +133,30 @@ const SellerAddCar = () => {
           });
         }
 
-        // setCarData({
-        //   image: "",
-        //   companyName: "",
-        //   carName: "",
-        //   fuel: "",
-        //   category: "",
-        //   description: "",
-        //   ownership: "",
-        //   cost: "",
-        //   kmDriven: "",
-        //   color: "",
-        //   regNumber: "",
-        //   mode: "",
-        //   variant: "",
-        //   milage: "",
-        //   seats: "",
-        //   luggage: "",
-        //   carId: "",
-        //   variantId: "",
-        //   companyId: "",
-        // });
-        // setTempComName("");
-        // settempcarName("");
-        // setTempvarname("");
+        setCarData({
+          image: "",
+          companyName: "",
+          carName: "",
+          fuel: "",
+          category: "",
+          description: "",
+          ownership: "",
+          cost: "",
+          kmDriven: "",
+          color: "",
+          regNumber: "",
+          mode: "",
+          variant: "",
+          milage: "",
+          seats: "",
+          luggage: "",
+          carId: "",
+          variantId: "",
+          companyId: "",
+        });
+        setTempComName("");
+        settempcarName("");
+        setTempvarname("");
         setDate(new Date());
 
         return toast.success("Car added successfully", {

@@ -1,8 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
+import { filterCar } from "../Helpers/cars";
+
 const HomeScreen = () => {
+  const [fields, setFileds] = useState({
+    kmDriven: "",
+    category: "Sedan",
+    fuel: "Petrol",
+    ownership: "1",
+    transmission: "Manual",
+    cost: "",
+  });
+
+  const history = useHistory();
+
+  const { kmDriven, category, fuel, ownership, transmission, cost } = fields;
+
+  const handelSearchFiled = (name) => (event) => {
+    const value = event.target.value;
+    setFileds({ ...fields, [name]: value });
+  };
+  const handelSearch = (event) => {
+    event.preventDefault();
+
+    if ((kmDriven !== "" && isNaN(kmDriven)) || (cost !== "" && isNaN(cost))) {
+      return toast.error("Please enter valid values", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+      });
+    }
+    const filterData = {
+      kmDriven,
+      category,
+      fuel,
+      ownership,
+      mode: transmission,
+      cost,
+    };
+
+    filterCar(filterData).then((data) => {
+      if (data.error) {
+        return toast.error(data.error, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+        });
+      }
+      history.push({
+        pathname: "/searched-cars",
+        state: { cars: data },
+      });
+    });
+  };
   return (
     <>
       <Header />
@@ -25,17 +85,19 @@ const HomeScreen = () => {
                     it with the necessary regelialia. It is a paradisematic
                     country, in which roasted parts
                   </p>
-                  <a
+                  {/* <a
                     href="https://vimeo.com/45830194"
                     className="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center"
                   >
                     <div className="icon d-flex align-items-center justify-content-center">
                       <span className="ion-ios-play"></span>
-                    </div>
-                    <div className="heading-title ml-5">
-                      <span>Easy steps for purchasing a car</span>
-                    </div>
-                  </a>
+                    </div> */}
+                  <div className="heading-title">
+                    <span className="text-light ">
+                      Easy steps for purchasing a car
+                    </span>
+                  </div>
+                  {/* </a> */}
                 </div>
               </div>
             </div>
@@ -52,49 +114,118 @@ const HomeScreen = () => {
                       action="#"
                       className="request-form ftco-animate bg-primary"
                     >
-                      <h2>Search your car</h2>
+                      <h2>Search perfect car</h2>
                       <div className="form-group">
                         <label for="" className="label">
-                          Select location
+                          Max Driven
                         </label>
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="City, Airport, Station, etc"
+                          placeholder="Km driven"
+                          value={kmDriven}
+                          onChange={handelSearchFiled("kmDriven")}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label for="" className="label">
+                          Max Cost
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Max Cost"
+                          value={cost}
+                          onChange={handelSearchFiled("cost")}
                         />
                       </div>
                       <div className="form-group">
                         <label for="" className="label">
                           Select Category
                         </label>
-                        <input
-                          type="text"
+                        <select
                           className="form-control"
-                          placeholder="Sedan, SUV, Crossover, Convertible ..."
-                        />
+                          value={category}
+                          onChange={handelSearchFiled("category")}
+                        >
+                          <option className="hidden" selected disabled>
+                            Please car type
+                          </option>
+                          <option className="text-dark" value="Sedan">
+                            Sedan
+                          </option>
+                          <option className="text-dark" value="SUV">
+                            SUV
+                          </option>
+                          <option className="text-dark" value="MUV">
+                            MUV
+                          </option>
+                          <option className="text-dark" value="Sports">
+                            Sports
+                          </option>
+                          <option className="text-dark" value="Hatchback">
+                            Hatchback
+                          </option>
+                          <option className="text-dark" value="Minivan">
+                            Minivan
+                          </option>
+                          <option className="text-dark" value="Convertible">
+                            Convertible
+                          </option>
+                          <option className="text-dark" value="Crossover">
+                            Crossover
+                          </option>
+                          <option className="text-dark" value="Other">
+                            Other
+                          </option>
+                        </select>
                       </div>
                       <div className="d-flex">
                         <div className="form-group mr-2">
                           <label for="" className="label">
                             Fuel Type
                           </label>
-                          <input
-                            type="text"
+                          <select
                             className="form-control"
-                            id="book_pick_date"
-                            placeholder="Petrol, Disel, Electric"
-                          />
+                            value={fuel}
+                            onChange={handelSearchFiled("fuel")}
+                          >
+                            <option className="hidden" selected disabled>
+                              Please select car type
+                            </option>
+                            <option className="text-dark" value="Petrol">
+                              Petrol
+                            </option>
+                            <option className="text-dark" value="Disel">
+                              Disel
+                            </option>
+                            <option className="text-dark" value="Electric">
+                              Electric
+                            </option>
+                          </select>
                         </div>
                         <div className="form-group ml-2">
                           <label for="" className="label">
                             Ownership
                           </label>
-                          <input
-                            type="text"
+                          <select
                             className="form-control"
-                            id="book_off_date"
-                            placeholder="1st, 2nd, 3rd"
-                          />
+                            value={ownership}
+                            onChange={handelSearchFiled("ownership")}
+                          >
+                            <option className="hidden" selected disabled>
+                              Ownership
+                            </option>
+                            <option className="text-dark" value="1">
+                              1
+                            </option>
+                            <option className="text-dark" value="2">
+                              2
+                            </option>
+                            <option className="text-dark" value="3 or higher">
+                              3 or higher
+                            </option>
+                          </select>
                         </div>
                       </div>
 
@@ -102,18 +233,28 @@ const HomeScreen = () => {
                         <label for="" className="label">
                           Transmission
                         </label>
-                        <input
-                          type="text"
+                        <select
                           className="form-control"
-                          id="time_pick"
-                          placeholder="Manual, Automatic"
-                        />
+                          value={transmission}
+                          onChange={handelSearchFiled("transmission")}
+                        >
+                          <option className="hidden" selected disabled>
+                            Transmission
+                          </option>
+                          <option className="text-dark" value="Manual">
+                            Manual
+                          </option>
+                          <option className="text-dark" value="Automatic">
+                            Automatic
+                          </option>
+                        </select>
                       </div>
                       <div className="form-group">
                         <input
                           type="submit"
                           value="Search"
                           className="btn btn-secondary py-3 px-4"
+                          onClick={handelSearch}
                         />
                       </div>
                     </form>
@@ -162,7 +303,7 @@ const HomeScreen = () => {
                         </div>
                       </div>
                       <p>
-                        <a href="#" className="btn btn-primary py-3 px-4">
+                        <a href="/cars" className="btn btn-primary py-3 px-4">
                           Get Your Perfect Car
                         </a>
                       </p>
@@ -528,7 +669,8 @@ const HomeScreen = () => {
           </div>
         </section>
       </>
-      <Footer/>
+      <Footer />
+      <ToastContainer />
     </>
   );
 };
