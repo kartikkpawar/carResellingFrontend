@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import { getAllBuyers, getAllSellers } from "../../Helpers/buyersAndSellers";
 
 const Adminusers = () => {
   const [buyer, setBuyer] = useState(true);
   const [data, setData] = useState([]);
   const [rerender, setRerender] = useState(false);
-  const handelChange = () => {
-    setBuyer(!buyer);
+  const handelChange = (user) => {
+    if (user === "buyer") {
+      setBuyer(true);
+    }
+    if (user === "seller") {
+      setBuyer(false);
+    }
     setRerender(!rerender);
   };
   useEffect(() => {
@@ -14,14 +20,28 @@ const Adminusers = () => {
       return getAllBuyers().then((data) => {
         if (data.error) {
           setData([]);
-          return alert("No Buyers found currently");
+          return toast.warning("No buyer exist", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+          });
         }
         return setData(data);
       });
     }
     return getAllSellers().then((data) => {
       if (data.error) {
-        return alert("No Sellers found currently");
+        return toast.warning("No seller exist", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+        });
       }
       return setData(data);
     });
@@ -31,13 +51,13 @@ const Adminusers = () => {
       <div className="w-100 d-flex justify-content-center align-items-center">
         <span
           className={`${!buyer ? "buyerText" : "textActive"}`}
-          onClick={handelChange}
+          onClick={() => handelChange("buyer")}
         >
           Buyers
         </span>
         <span
           className={`${buyer ? "sellerText" : "textActive"}`}
-          onClick={handelChange}
+          onClick={() => handelChange("seller")}
         >
           Seller
         </span>
@@ -78,6 +98,7 @@ const Adminusers = () => {
           ))}
         </tbody>
       </table>
+      <ToastContainer />
     </>
   );
 };
