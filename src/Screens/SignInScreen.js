@@ -18,8 +18,8 @@ const SignInScreen = () => {
     // password: "1234",
 
     //NOTE Default Buyer Login later remove this
-    email: "seller@seller.com",
-    password: "1234",
+    email: "",
+    password: "",
   });
   const { email, password } = authFields;
   const history = useHistory();
