@@ -25,6 +25,7 @@ const SignUpScreen = () => {
     gender: true,
   });
 
+  const [tempDistrict, setTempDistrict] = useState("");
   const [redirect, setRedirect] = useState(false);
   const {
     fname,
@@ -40,10 +41,13 @@ const SignUpScreen = () => {
     gender,
   } = profileData;
   const districtListhelper = (event) => {
-    setProfileData({ ...profileData, state: event.target.value });
+    setProfileData({ ...profileData, state: event.target.value, district: "" });
+
     stateDistrict.states.forEach((statedata) => {
       if (statedata.state === event.target.value) {
+        console.log("Change Here");
         setDistritlist(statedata.districts);
+        setTempDistrict(statedata.districts[0]);
       }
     });
   };
@@ -59,7 +63,7 @@ const SignUpScreen = () => {
       contact === "" ||
       address === "" ||
       state === "" ||
-      district === "" ||
+      (district === "" && tempDistrict === "") ||
       pincode === "" ||
       password === "" ||
       confirmPassword === ""
@@ -82,7 +86,7 @@ const SignUpScreen = () => {
     formData.set("contact", contact);
     formData.set("pincode", pincode);
     formData.set("address", address);
-    formData.set("district", district);
+    formData.set("district", district === "" ? tempDistrict : district);
     formData.set("state", state);
     formData.set("profile", "");
     if (password === confirmPassword) {
@@ -97,7 +101,7 @@ const SignUpScreen = () => {
         draggable: true,
       });
     }
-
+    setTempDistrict("");
     for (const obj of formData.entries()) {
       console.log(obj);
     }
