@@ -17,19 +17,19 @@ const SellerAddCar = () => {
     image: "",
     companyName: "",
     carName: "",
-    fuel: "",
-    category: "",
+    fuel: "Petrol",
+    category: "Sedan",
     description: "",
-    ownership: "",
+    ownership: "1",
     cost: "",
     kmDriven: "",
     color: "",
     regNumber: "",
-    mode: "",
+    mode: "Manual",
     variant: "",
     milage: "",
     seats: "",
-    luggage: "",
+    luggage: false,
     carId: "",
     variantId: "",
     companyId: "",
@@ -212,6 +212,7 @@ const SellerAddCar = () => {
         if (data.error) {
           return setCarCompany([]);
         }
+
         return setCarCompany(data);
       })
       .catch((err) => console.log(err));
@@ -325,9 +326,9 @@ const SellerAddCar = () => {
             <option className="hidden" selected disabled>
               Please select car ownership
             </option>
-            <option>1</option>
-            <option>2</option>
-            <option>3 or higher</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3 or higher">3 or higher</option>
           </select>
         </div>{" "}
         <div className="col-md-4">
@@ -339,9 +340,9 @@ const SellerAddCar = () => {
             <option className="hidden" selected disabled>
               Please select fuel type
             </option>
-            <option>Petrol</option>
-            <option>Disel</option>
-            <option>Electric</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Disel">Disel</option>
+            <option value="Electric">Electric</option>
           </select>
         </div>{" "}
         <div className="col-md-4">
@@ -353,8 +354,8 @@ const SellerAddCar = () => {
             <option className="hidden" selected disabled>
               Please select transmission
             </option>
-            <option>Manual</option>
-            <option>Automatic</option>
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
           </select>
         </div>
       </div>
@@ -401,15 +402,15 @@ const SellerAddCar = () => {
             <option className="hidden" selected disabled>
               Please select car type
             </option>
-            <option>Sedan</option>
-            <option>SUV</option>
-            <option>MUV</option>
-            <option>Sports</option>
-            <option>Hatchback</option>
-            <option>Minivan</option>
-            <option>Convertible</option>
-            <option>Crossover</option>
-            <option>Other</option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="MUV">MUV</option>
+            <option value="Sports">Sports</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Minivan">Minivan</option>
+            <option value="Convertible">Convertible</option>
+            <option value="Crossover">Crossover</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <div style={{ paddingRight: "15px" }} className="w-100 col-md-6">
