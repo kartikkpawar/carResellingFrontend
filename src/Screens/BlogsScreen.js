@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const BlogsScreen = () => {
   return (
@@ -47,21 +48,21 @@ const BlogsScreen = () => {
                   <div className="text px-md-5 pt-4">
                     <div className="meta mb-3">
                       <div>
-                        <a href="#">Oct. 29, 2019</a>
+                        <Link>Oct. 29, 2019</Link>
                       </div>
                       <div>
-                        <a href="#">Admin</a>
+                        <Link>Admin</Link>
                       </div>
                       <div>
-                        <a href="#" className="meta-chat">
+                        <Link className="meta-chat">
                           <span className="icon-chat"></span> 3
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <h3 className="heading mt-2">
-                      <a href="#">
+                      <Link>
                         Why Lead Generation is Key for Business Growth
-                      </a>
+                      </Link>
                     </h3>
                     <p>
                       A small river named Duden flows by their place and
@@ -70,9 +71,9 @@ const BlogsScreen = () => {
                       fly into your mouth.
                     </p>
                     <p>
-                      <a href="blog-single.html" className="btn btn-primary">
+                      <Link className="btn btn-primary">
                         Continue <span className="icon-long-arrow-right"></span>
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -89,21 +90,21 @@ const BlogsScreen = () => {
                   <div className="text px-md-5 pt-4">
                     <div className="meta mb-3">
                       <div>
-                        <a href="#">Oct. 29, 2019</a>
+                        <Link>Oct. 29, 2019</Link>
                       </div>
                       <div>
-                        <a href="#">Admin</a>
+                        <Link>Admin</Link>
                       </div>
                       <div>
-                        <a href="#" className="meta-chat">
+                        <Link className="meta-chat">
                           <span className="icon-chat"></span> 3
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <h3 className="heading mt-2">
-                      <a href="#">
+                      <Link>
                         Why Lead Generation is Key for Business Growth
-                      </a>
+                      </Link>
                     </h3>
                     <p>
                       A small river named Duden flows by their place and
@@ -112,9 +113,9 @@ const BlogsScreen = () => {
                       fly into your mouth.
                     </p>
                     <p>
-                      <a href="blog-single.html" className="btn btn-primary">
+                      <Link className="btn btn-primary">
                         Continue <span className="icon-long-arrow-right"></span>
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -131,21 +132,21 @@ const BlogsScreen = () => {
                   <div className="text px-md-5 pt-4">
                     <div className="meta mb-3">
                       <div>
-                        <a href="#">Oct. 29, 2019</a>
+                        <Link>Oct. 29, 2019</Link>
                       </div>
                       <div>
-                        <a href="#">Admin</a>
+                        <Link>Admin</Link>
                       </div>
                       <div>
-                        <a href="#" className="meta-chat">
+                        <Link className="meta-chat">
                           <span className="icon-chat"></span> 3
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <h3 className="heading mt-2">
-                      <a href="#">
+                      <Link>
                         Why Lead Generation is Key for Business Growth
-                      </a>
+                      </Link>
                     </h3>
                     <p>
                       A small river named Duden flows by their place and
@@ -154,9 +155,9 @@ const BlogsScreen = () => {
                       fly into your mouth.
                     </p>
                     <p>
-                      <a href="blog-single.html" className="btn btn-primary">
+                      <Link className="btn btn-primary">
                         Continue <span className="icon-long-arrow-right"></span>
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -173,21 +174,21 @@ const BlogsScreen = () => {
                   <div className="text px-md-5 pt-4">
                     <div className="meta mb-3">
                       <div>
-                        <a href="#">Oct. 29, 2019</a>
+                        <Link>Oct. 29, 2019</Link>
                       </div>
                       <div>
-                        <a href="#">Admin</a>
+                        <Link>Admin</Link>
                       </div>
                       <div>
-                        <a href="#" className="meta-chat">
+                        <Link className="meta-chat">
                           <span className="icon-chat"></span> 3
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <h3 className="heading mt-2">
-                      <a href="#">
+                      <Link>
                         Why Lead Generation is Key for Business Growth
-                      </a>
+                      </Link>
                     </h3>
                     <p>
                       A small river named Duden flows by their place and
@@ -196,9 +197,9 @@ const BlogsScreen = () => {
                       fly into your mouth.
                     </p>
                     <p>
-                      <a href="blog-single.html" className="btn btn-primary">
+                      <Link className="btn btn-primary">
                         Continue <span className="icon-long-arrow-right"></span>
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -215,21 +216,21 @@ const BlogsScreen = () => {
                   <div className="text px-md-5 pt-4">
                     <div className="meta mb-3">
                       <div>
-                        <a href="#">Oct. 29, 2019</a>
+                        <Link>Oct. 29, 2019</Link>
                       </div>
                       <div>
-                        <a href="#">Admin</a>
+                        <Link>Admin</Link>
                       </div>
                       <div>
-                        <a href="#" className="meta-chat">
+                        <Link className="meta-chat">
                           <span className="icon-chat"></span> 3
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <h3 className="heading mt-2">
-                      <a href="#">
+                      <Link>
                         Why Lead Generation is Key for Business Growth
-                      </a>
+                      </Link>
                     </h3>
                     <p>
                       A small river named Duden flows by their place and
@@ -238,9 +239,9 @@ const BlogsScreen = () => {
                       fly into your mouth.
                     </p>
                     <p>
-                      <a href="blog-single.html" className="btn btn-primary">
+                      <Link className="btn btn-primary">
                         Continue <span className="icon-long-arrow-right"></span>
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -257,21 +258,21 @@ const BlogsScreen = () => {
                   <div className="text px-md-5 pt-4">
                     <div className="meta mb-3">
                       <div>
-                        <a href="#">Oct. 29, 2019</a>
+                        <Link>Oct. 29, 2019</Link>
                       </div>
                       <div>
-                        <a href="#">Admin</a>
+                        <Link>Admin</Link>
                       </div>
                       <div>
-                        <a href="#" className="meta-chat">
+                        <Link className="meta-chat">
                           <span className="icon-chat"></span> 3
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <h3 className="heading mt-2">
-                      <a href="#">
+                      <Link>
                         Why Lead Generation is Key for Business Growth
-                      </a>
+                      </Link>
                     </h3>
                     <p>
                       A small river named Duden flows by their place and
@@ -280,9 +281,9 @@ const BlogsScreen = () => {
                       fly into your mouth.
                     </p>
                     <p>
-                      <a href="blog-single.html" className="btn btn-primary">
+                      <Link className="btn btn-primary">
                         Continue <span className="icon-long-arrow-right"></span>
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -293,25 +294,25 @@ const BlogsScreen = () => {
                 <div className="block-27">
                   <ul>
                     <li>
-                      <a href="#">&lt;</a>
+                      <Link>&lt;</Link>
                     </li>
                     <li className="active">
                       <span>1</span>
                     </li>
                     <li>
-                      <a href="#">2</a>
+                      <Link>2</Link>
                     </li>
                     <li>
-                      <a href="#">3</a>
+                      <Link>3</Link>
                     </li>
                     <li>
-                      <a href="#">4</a>
+                      <Link>4</Link>
                     </li>
                     <li>
-                      <a href="#">5</a>
+                      <Link>5</Link>
                     </li>
                     <li>
-                      <a href="#">&gt;</a>
+                      <Link>&gt;</Link>
                     </li>
                   </ul>
                 </div>

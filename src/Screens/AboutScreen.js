@@ -62,7 +62,7 @@ const AboutScreen = () => {
                     which roasted parts of sentences fly into your mouth.
                   </p>
                   <p>
-                    <a href="#" className="btn btn-primary py-3 px-4">
+                    <a href="/cars" className="btn btn-primary py-3 px-4">
                       Search Vehicle
                     </a>
                   </p>
@@ -81,10 +81,10 @@ const AboutScreen = () => {
             <div className="row justify-content-end">
               <div className="col-md-6 heading-section heading-section-white ftco-animate">
                 <h2 className="mb-3">
-                  Do You Want To Earn With Us? So Don't Be Late.
+                Wanna sell car with us? So don't be late
                 </h2>
-                <a href="#" className="btn btn-primary btn-lg">
-                  Become A Driver
+                <a href="/signin" className="btn btn-primary btn-lg">
+                  Become A Seller
                 </a>
               </div>
             </div>
@@ -262,6 +262,7 @@ const AboutScreen = () => {
             </div>
           </div>
         </section>
+      
       </>
       <Footer />
     </>

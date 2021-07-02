@@ -711,9 +711,9 @@ const NotFound = () => {
               mystery. But you can click the button below to go back to the
               homepage.
             </p>
-            <Link to='/' className='btn-get-started '>
+            <a href='/' className='btn-get-started '>
               HOME
-            </Link>
+            </a>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const ContactScreen = () => {
   return (
@@ -56,7 +57,7 @@ const ContactScreen = () => {
                       </div>
                       <p>
                         <span>Phone:</span>
-                        <a href="tel://1234567920">0257 225 8393</a>
+                        <Link>0257 225 8393</Link>
                       </p>
                     </div>
                   </div>
@@ -67,9 +68,9 @@ const ContactScreen = () => {
                       </div>
                       <p>
                         <span>Email:</span>
-                        <a href="mailto:info@yoursite.com">
+                        <Link>
                           contact@carbook.com
-                        </a>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -110,6 +111,7 @@ const ContactScreen = () => {
                   </div>
                   <div className="form-group">
                     <input
+                      disabled
                       type="submit"
                       value="Send Message"
                       className="btn btn-primary py-3 px-5"
