@@ -101,3 +101,12 @@ export const filterCar = (filters) => {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
+export const getTotalCars = () => {
+  return fetch(`${API}/carcounts`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};

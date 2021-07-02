@@ -189,6 +189,9 @@ const CarScreen = () => {
                       {carInfo?.kmDriven} Km Driven
                     </span>
                     <h2>{carInfo?.carName}</h2>
+                    <span className="text-primary text-center h4">
+                      <Currency currency="INR" quantity={carInfo?.cost} />
+                    </span>
                   </div>
                 </div>
               </div>
@@ -595,7 +598,7 @@ const CarScreen = () => {
                               />
                             </div>
                             <div className="container d-flex justify-content-center mt-5">
-                              <span className="display-4 text-dark">
+                              <span className="display-4 text-dark text-center">
                                 {bidderInfo?.data?.name}
                               </span>{" "}
                             </div>{" "}

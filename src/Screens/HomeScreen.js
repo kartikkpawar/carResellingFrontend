@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { getTotalUsers } from "../Helpers/buyersAndSellers";
 
-import { filterCar } from "../Helpers/cars";
+import { filterCar, getTotalCars } from "../Helpers/cars";
 
 const HomeScreen = () => {
   const [fields, setFileds] = useState({
@@ -20,10 +21,23 @@ const HomeScreen = () => {
 
   const { kmDriven, category, fuel, ownership, transmission, cost } = fields;
 
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalCars, setTotalCars] = useState(0);
+  useEffect(() => {
+    getTotalCars()
+      .then((data) => setTotalCars(data))
+      .catch();
+    getTotalUsers()
+      .then((data) => setTotalUsers(data))
+      .catch();
+  }, []);
+  console.log(totalUsers, totalCars);
+
   const handelSearchFiled = (name) => (event) => {
     const value = event.target.value;
     setFileds({ ...fields, [name]: value });
   };
+
   const handelSearch = (event) => {
     event.preventDefault();
 
@@ -344,8 +358,8 @@ const HomeScreen = () => {
                     which roasted parts of sentences fly into your mouth.
                   </p>
                   <p>
-                    <a href="#" className="btn btn-primary py-3 px-4">
-                      Search Vehicle
+                    <a href="/cars" className="btn btn-primary py-3 px-4">
+                      Search Cars
                     </a>
                   </p>
                 </div>
@@ -363,10 +377,10 @@ const HomeScreen = () => {
             <div className="row justify-content-end">
               <div className="col-md-6 heading-section heading-section-white ftco-animate">
                 <h2 className="mb-3">
-                  Do You Want To Earn With Us? So Don't Be Late.
+                  Wanna sell car with us? So don't be late
                 </h2>
-                <a href="#" className="btn btn-primary btn-lg">
-                  Become A Driver
+                <a href="/signin" className="btn btn-primary btn-lg">
+                  Become A Seller
                 </a>
               </div>
             </div>
@@ -616,9 +630,7 @@ const HomeScreen = () => {
               <div className="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
                 <div className="block-18">
                   <div className="text text-border d-flex align-items-center">
-                    <strong className="number" data-number="60">
-                      0
-                    </strong>
+                    <strong className="number">1</strong>
                     <span>
                       Year <br />
                       Experienced
@@ -629,9 +641,7 @@ const HomeScreen = () => {
               <div className="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
                 <div className="block-18">
                   <div className="text text-border d-flex align-items-center">
-                    <strong className="number" data-number="1090">
-                      0
-                    </strong>
+                    <strong className="number">{totalCars}</strong>
                     <span>
                       Total <br />
                       Cars
@@ -642,25 +652,10 @@ const HomeScreen = () => {
               <div className="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
                 <div className="block-18">
                   <div className="text text-border d-flex align-items-center">
-                    <strong className="number" data-number="2590">
-                      0
-                    </strong>
+                    <strong className="number">{totalUsers}</strong>
                     <span>
                       Happy <br />
                       Customers
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-                <div className="block-18">
-                  <div className="text d-flex align-items-center">
-                    <strong className="number" data-number="67">
-                      0
-                    </strong>
-                    <span>
-                      Total <br />
-                      Branches
                     </span>
                   </div>
                 </div>
