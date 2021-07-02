@@ -34,7 +34,7 @@ const ServicesScreen = () => {
         </section>
 
         <section className="ftco-section">
-          <div className="container">
+          <div className="container d-flex flex-column align-items-center">
             <div className="row justify-content-center mb-5">
               <div className="col-md-7 text-center heading-section ftco-animate">
                 <span className="subheading">Services</span>
@@ -42,59 +42,38 @@ const ServicesScreen = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <div className="services services-2 w-100 text-center">
                   <div className="icon d-flex align-items-center justify-content-center">
                     <span className="flaticon-route"></span>
                   </div>
                   <div className="text w-100">
-                    <h3 className="heading mb-2">Wedding Ceremony</h3>
-                    <p>
-                      A small river named Duden flows by their place and
-                      supplies it with the necessary regelialia.
-                    </p>
+                    <h3 className="heading mb-2">
+                      Select location as your preference
+                    </h3>
+                    <p>Sell the cars based on the location accessible to you</p>
                   </div>
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <div className="services services-2 w-100 text-center">
                   <div className="icon d-flex align-items-center justify-content-center">
-                    <span className="flaticon-route"></span>
+                    <span className="flaticon-handshake"></span>
                   </div>
                   <div className="text w-100">
-                    <h3 className="heading mb-2">City Transfer</h3>
-                    <p>
-                      A small river named Duden flows by their place and
-                      supplies it with the necessary regelialia.
-                    </p>
+                    <h3 className="heading mb-2">Ask for the Best Deal</h3>
+                    <p>Select the car and ask the car at your cost.</p>
                   </div>
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <div className="services services-2 w-100 text-center">
                   <div className="icon d-flex align-items-center justify-content-center">
-                    <span className="flaticon-route"></span>
+                    <span className="flaticon-rent"></span>
                   </div>
                   <div className="text w-100">
-                    <h3 className="heading mb-2">Airport Transfer</h3>
-                    <p>
-                      A small river named Duden flows by their place and
-                      supplies it with the necessary regelialia.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="services services-2 w-100 text-center">
-                  <div className="icon d-flex align-items-center justify-content-center">
-                    <span className="flaticon-route"></span>
-                  </div>
-                  <div className="text w-100">
-                    <h3 className="heading mb-2">Whole City Tour</h3>
-                    <p>
-                      A small river named Duden flows by their place and
-                      supplies it with the necessary regelialia.
-                    </p>
+                    <h3 className="heading mb-2">Sell or Purchase the car</h3>
+                    <p>Sell or Buy the car according to you preference</p>
                   </div>
                 </div>
               </div>
@@ -111,10 +90,10 @@ const ServicesScreen = () => {
             <div className="row justify-content-end">
               <div className="col-md-6 heading-section heading-section-white ftco-animate">
                 <h2 className="mb-3">
-                  Do You Want To Earn With Us? So Don't Be Late.
+                  Wanna sell car with us? So don't be late
                 </h2>
-                <a href="#" className="btn btn-primary btn-lg">
-                  Become A Driver
+                <a href="/signin" className="btn btn-primary btn-lg">
+                  Become A Seller
                 </a>
               </div>
             </div>

@@ -16,7 +16,7 @@ const BuyerDashboard = () => {
 
   return (
     <div className="hero-wrap d-flex dash">
-      {makeRedirect && <Redirect to="/cars" />}
+      {makeRedirect && <Redirect to="/" />}
       <div className="dash-left d-flex align-items-center justify-content-between flex-column">
         <div
           style={{
