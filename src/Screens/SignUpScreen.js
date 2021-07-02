@@ -119,7 +119,7 @@ const SignUpScreen = () => {
                 draggable: true,
               });
             }
-            setRedirect(true);
+            document.location.href = '/'
           })
           .catch((err) => {
             console.log(err);
@@ -136,7 +136,7 @@ const SignUpScreen = () => {
                 draggable: true,
               });
             }
-            setRedirect(true);
+            document.location.href = '/'
           })
           .catch((err) => {
             console.log(err);

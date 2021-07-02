@@ -49,7 +49,7 @@ const SignInScreen = () => {
                 draggable: true,
               });
             }
-            authenticate(data, () => history.push("/"));
+            authenticate(data, () => document.location.href = '/');
           })
           .catch((err) => console.log(err))
       : sellerSignIn(user)
@@ -64,7 +64,7 @@ const SignInScreen = () => {
                 draggable: true,
               });
             }
-            authenticate(data, () => history.push("/"));
+            authenticate(data, () => document.location.href = '/');
           })
           .catch((err) => console.log(err));
   };

@@ -75,7 +75,7 @@ const SellerDashboard = () => {
         <div
           className="mb-2 d-flex align-items-center text-light"
           style={{ fontSize: "1.2rem", userSelect: "none", cursor: "pointer" }}
-          onClick={() => setMakeRedirect(true)}
+          onClick={() => document.location.href = '/'}
         >
           <BiLogOut
             style={{

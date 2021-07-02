@@ -403,7 +403,7 @@ const HomeScreen = () => {
                       <div
                         className='user-img mb-2'
                         style={{
-                          backgroundImage: `url(assets/images/person_1.jpg)`,
+                          backgroundImage: `url(assets/images/person_4.jpg)`,
                         }}
                       ></div>
                       <div className='text pt-4'>
@@ -412,49 +412,12 @@ const HomeScreen = () => {
                           countries Vokalia and Consonantia, there live the
                           blind texts.
                         </p>
-                        <p className='name'>Roger Scott</p>
-                        <span className='position'>Marketing Manager</span>
+                        <p className='name'>Prasad Patil</p>
+                        <span className='position'>MERN Stack Developer</span>
                       </div>
                     </div>
                   </div>
-                  <div className='item'>
-                    <div className='testimony-wrap rounded text-center py-4 pb-5'>
-                      <div
-                        className='user-img mb-2'
-                        style={{
-                          backgroundImage: `url(assets/images/person_2.jpg)`,
-                        }}
-                      ></div>
-                      <div className='text pt-4'>
-                        <p className='mb-4'>
-                          Far far away, behind the word mountains, far from the
-                          countries Vokalia and Consonantia, there live the
-                          blind texts.
-                        </p>
-                        <p className='name'>Roger Scott</p>
-                        <span className='position'>Interface Designer</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='item'>
-                    <div className='testimony-wrap rounded text-center py-4 pb-5'>
-                      <div
-                        className='user-img mb-2'
-                        style={{
-                          backgroundImage: `url(assets/images/person_3.jpg)`,
-                        }}
-                      ></div>
-                      <div className='text pt-4'>
-                        <p className='mb-4'>
-                          Far far away, behind the word mountains, far from the
-                          countries Vokalia and Consonantia, there live the
-                          blind texts.
-                        </p>
-                        <p className='name'>Roger Scott</p>
-                        <span className='position'>UI Designer</span>
-                      </div>
-                    </div>
-                  </div>
+
                   <div className='item'>
                     <div className='testimony-wrap rounded text-center py-4 pb-5'>
                       <div
@@ -469,11 +432,32 @@ const HomeScreen = () => {
                           countries Vokalia and Consonantia, there live the
                           blind texts.
                         </p>
-                        <p className='name'>Roger Scott</p>
+                        <p className='name'>Chaitanya Shinde</p>
                         <span className='position'>Web Developer</span>
                       </div>
                     </div>
                   </div>
+
+                  <div className='item'>
+                    <div className='testimony-wrap rounded text-center py-4 pb-5'>
+                      <div
+                        className='user-img mb-2'
+                        style={{
+                          backgroundImage: `url(assets/images/person_4.jpg)`,
+                        }}
+                      ></div>
+                      <div className='text pt-4'>
+                        <p className='mb-4'>
+                          Far far away, behind the word mountains, far from the
+                          countries Vokalia and Consonantia, there live the
+                          blind texts.
+                        </p>
+                        <p className='name'>Swapnil Nyadhe</p>
+                        <span className='position'>Web Developer</span>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className='item'>
                     <div className='testimony-wrap rounded text-center py-4 pb-5'>
                       <div
@@ -488,8 +472,28 @@ const HomeScreen = () => {
                           countries Vokalia and Consonantia, there live the
                           blind texts.
                         </p>
-                        <p className='name'>Roger Scott</p>
-                        <span className='position'>System Analyst</span>
+                        <p className='name'>Tejas Saindane</p>
+                        <span className='position'>Frontend Developer</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='item'>
+                    <div className='testimony-wrap rounded text-center py-4 pb-5'>
+                      <div
+                        className='user-img mb-2'
+                        style={{
+                          backgroundImage: `url(assets/images/person_1.jpg)`,
+                        }}
+                      ></div>
+                      <div className='text pt-4'>
+                        <p className='mb-4'>
+                          Far far away, behind the word mountains, far from the
+                          countries Vokalia and Consonantia, there live the
+                          blind texts.
+                        </p>
+                        <p className='name'>Kartik Pawar</p>
+                        <span className='position'>MERN Stack Developer</span>
                       </div>
                     </div>
                   </div>
