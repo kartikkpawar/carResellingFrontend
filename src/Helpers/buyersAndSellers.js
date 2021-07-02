@@ -46,3 +46,12 @@ export const getAllSellers = () => {
     })
     .catch((err) => console.log(err));
 };
+export const getTotalUsers = () => {
+  return fetch(`${API}/usercounts`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};

@@ -44,8 +44,8 @@ const ContactScreen = () => {
                         <span className="icon-map-o"></span>
                       </div>
                       <p>
-                        <span>Address:</span> 198 West 21th Street, Suite 721
-                        New York NY 10016
+                        <span>Address:</span> Bambhori Pr. Chandsar, Jalgaon,
+                        Maharashtra 425001
                       </p>
                     </div>
                   </div>
@@ -56,7 +56,7 @@ const ContactScreen = () => {
                       </div>
                       <p>
                         <span>Phone:</span>
-                        <a href="tel://1234567920">+ 1235 2355 98</a>
+                        <a href="tel://1234567920">0257 225 8393</a>
                       </p>
                     </div>
                   </div>
@@ -67,7 +67,9 @@ const ContactScreen = () => {
                       </div>
                       <p>
                         <span>Email:</span>
-                        <a href="mailto:info@yoursite.com">info@yoursite.com</a>
+                        <a href="mailto:info@yoursite.com">
+                          contact@carbook.com
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -114,11 +116,6 @@ const ContactScreen = () => {
                     />
                   </div>
                 </form>
-              </div>
-            </div>
-            <div className="row justify-content-center">
-              <div className="col-md-12">
-                <div id="map" className="bg-white"></div>
               </div>
             </div>
           </div>
