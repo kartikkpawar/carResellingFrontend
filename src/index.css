@@ -200,3 +200,12 @@
   user-select: none;
   cursor: pointer;
 }
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.loaderText {
+  margin-top: 15px;
+  font-size: 20px;
+}

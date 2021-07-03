@@ -4,9 +4,12 @@ import Header from "../components/Header";
 import { getAllCars } from "../Helpers/cars";
 import Currency from "react-currency-formatter";
 import { useHistory } from "react-router-dom";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const Cars = () => {
   const [cars, setCars] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getAllCars()
@@ -15,6 +18,7 @@ const Cars = () => {
           return setCars([]);
         }
         dataSplitter(data);
+        setLoading(false);
       })
       .catch();
   }, []);
@@ -59,48 +63,55 @@ const Cars = () => {
         </section>
 
         <section className="ftco-section bg-light">
-          <div className="container">
-            {cars?.map((carRow, idx) => (
-              <div className="row" idx={idx}>
-                {carRow?.map((car, idx) => (
-                  <div className="col-md-4" key={idx}>
-                    <div className="car-wrap rounded ">
-                      <img
-                        src={`https://carreselling-server.herokuapp.com/api/car/${car._id}/photo`}
-                        className="img rounded d-flex align-items-end"
-                        alt=""
-                      />
-                      <div className="text">
-                        <h2 className="mb-0">
-                          <a href="car-details.html">{car.carName}</a>
-                        </h2>
-                        <div className="d-flex mb-3">
-                          <span className="cat">{car.companyName}</span>
-                          <p className="price ml-auto">
-                            <Currency currency="INR" quantity={car.cost} />{" "}
-                            <span>expected</span>
-                          </p>
-                        </div>
-                        <div
-                          className="d-flex btn btn-secondary py-2 ml-1 justify-content-center"
-                          onClick={() => {
-                            history.push({
-                              pathname: "/car-details",
-                              state: { carRow, car },
-                            });
-                          }}
-                        >
-                          <span className="btn btn-secondary py-2 ml-1">
-                            View More
-                          </span>
+          {loading ? (
+            <div className="loaderContainer">
+              <Loader type="Puff" color="#00BFFF" height={100} width={100} />
+              <span className="loaderText">Your Cars are loading...</span>
+            </div>
+          ) : (
+            <div className="container">
+              {cars?.map((carRow, idx) => (
+                <div className="row" idx={idx}>
+                  {carRow?.map((car, idx) => (
+                    <div className="col-md-4" key={idx}>
+                      <div className="car-wrap rounded ">
+                        <img
+                          src={`https://carreselling-server.herokuapp.com/api/car/${car._id}/photo`}
+                          className="img rounded d-flex align-items-end"
+                          alt=""
+                        />
+                        <div className="text">
+                          <h2 className="mb-0">
+                            <a href="car-details.html">{car.carName}</a>
+                          </h2>
+                          <div className="d-flex mb-3">
+                            <span className="cat">{car.companyName}</span>
+                            <p className="price ml-auto">
+                              <Currency currency="INR" quantity={car.cost} />{" "}
+                              <span>expected</span>
+                            </p>
+                          </div>
+                          <div
+                            className="d-flex btn btn-secondary py-2 ml-1 justify-content-center"
+                            onClick={() => {
+                              history.push({
+                                pathname: "/car-details",
+                                state: { carRow, car },
+                              });
+                            }}
+                          >
+                            <span className="btn btn-secondary py-2 ml-1">
+                              View More
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       </>
       <Footer />
