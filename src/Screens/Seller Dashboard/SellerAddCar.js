@@ -7,7 +7,8 @@ import { toast, ToastContainer } from "react-toastify";
 import { isAuthenticated } from "../../Helpers/authentication";
 import { getcars, getcompany, getvairnats } from "../../Helpers/carcategory";
 import { addCarSeller } from "../../Helpers/cars";
-
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 const SellerAddCar = () => {
   const [calenderVisible, setCalenderVisible] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -60,7 +61,7 @@ const SellerAddCar = () => {
     variantId,
     companyId,
   } = carData;
-
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const handelChange = (name) => (event) => {
     const value = name === "image" ? event.target.files[0] : event.target.value;
     setCarData({ ...carData, [name]: value });
@@ -90,6 +91,17 @@ const SellerAddCar = () => {
   const handelSubmit = () => {
     // NOTE send the ownerId as "owner" from user._id
 
+    if (image === "") {
+      return toast.error("Please select image for the car", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+      });
+    }
+
     const formData = new FormData();
     formData.set("image", image);
     formData.set("companyName", tempComName);
@@ -100,10 +112,10 @@ const SellerAddCar = () => {
     formData.set("carId", carId);
     formData.set("variantId", variantId);
     // id ends
-    formData.set("fuel", fuel);
+    formData.set("fuel", fuel === "" ? "Petrol" : fuel);
     formData.set("category", category);
     formData.set("description", description);
-    formData.set("ownership", ownership);
+    formData.set("ownership", ownership === "" ? "1" : ownership);
     formData.set("cost", cost);
     formData.set("kmDriven", kmDriven);
     formData.set("color", color);
@@ -111,7 +123,7 @@ const SellerAddCar = () => {
     formData.set("milage", milage);
     formData.set("seats", seats);
     formData.set("luggage", luggage);
-    formData.set("mode", mode);
+    formData.set("mode", mode === "" ? "Manual" : mode);
 
     formData.set("purchaseDate", date);
     formData.set("owner", user._id);
@@ -119,10 +131,11 @@ const SellerAddCar = () => {
     for (const obj of formData.entries()) {
       console.log(obj);
     }
-
+    setButtonDisabled(true);
     addCarSeller(formData, user._id, token)
       .then((data) => {
         if (data.error) {
+          setButtonDisabled(false);
           return toast.error(data.error, {
             position: "bottom-right",
             autoClose: 3000,
@@ -132,6 +145,7 @@ const SellerAddCar = () => {
             draggable: true,
           });
         }
+        setButtonDisabled(false);
 
         setCarData({
           image: "",
@@ -507,15 +521,23 @@ const SellerAddCar = () => {
           />
         </div>
       </div>
-      <div className="row w-100 mt-4">
+      <div className="row w-100">
         <div className="col-md-6"></div>
         <div className="col-md-6">
-          <input
+          <button
+            className={`${
+              buttonDisabled ? "btnRegisterDisabled" : "btnRegister"
+            }`}
             type="submit"
-            className="btnRegister"
-            value="Add Car"
             onClick={handelSubmit}
-          />
+            disabled={buttonDisabled}
+          >
+            {buttonDisabled ? (
+              <Loader type="TailSpin" color="#00BFFF" height={30} width={30} />
+            ) : (
+              " Add Car"
+            )}
+          </button>
         </div>
       </div>
       <ToastContainer />

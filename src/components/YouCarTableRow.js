@@ -7,13 +7,15 @@ import Fade from "@material-ui/core/Fade";
 import { deleteCar, updateSoldStatus } from "../Helpers/cars";
 import { isAuthenticated } from "../Helpers/authentication";
 import { toast } from "react-toastify";
-import { getcarname, getvariantname } from "../Helpers/carcategory";
-const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { useHistory } from "react-router-dom";
+const YouCarTableRow = ({ car, idx, openModal, reRenderPage, renderVal }) => {
   const [delModal, setDelModal] = useState(false);
   const [carId, setCarId] = useState("");
 
   const { user, token } = isAuthenticated();
-
+  const history = useHistory();
   const handelDelete = (status) => {
     if (!status) {
       return setDelModal(false);
@@ -40,13 +42,14 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
           draggable: true,
         });
         setDelModal(false);
-        return reRenderPage(true);
+        return reRenderPage(!renderVal);
       });
     }
   };
 
   const updateSoldStatusHelper = (id, soldStatus) => {
     const val = { soldStatus };
+    setLoading(true);
     updateSoldStatus(id, token, user._id, val)
       .then((data) => {
         console.log(data);
@@ -60,11 +63,13 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
             draggable: true,
           });
         }
+        setLoading(false);
         setDelModal(false);
-        return reRenderPage(true);
+        return reRenderPage(!renderVal);
       })
       .catch((err) => console.log(err));
   };
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -80,7 +85,14 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage }) => {
               updateSoldStatusHelper(car._id, !car.sold);
             }}
           >
-            {car.sold ? "Sold Out" : "Not Sold"}
+            {!loading && (car.sold ? "Sold Out" : "Not Sold")}
+            {loading && (
+              <>
+                {" "}
+                <Loader type="TailSpin" color="#FFF" height={15} width={15} />
+                <span>Updating</span>
+              </>
+            )}
           </span>
         </td>
         <td className="text-center">
