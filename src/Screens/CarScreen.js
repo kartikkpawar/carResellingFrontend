@@ -15,6 +15,7 @@ const CarScreen = () => {
   const { user, token } = isAuthenticated();
   const location = useLocation();
   const [bids, setBids] = useState([]);
+  const history = useHistory();
 
   const [makeredirect, setMakeredirect] = useState(false);
   const [carRow, setCarRow] = useState([]);
@@ -694,7 +695,12 @@ const CarScreen = () => {
                     />
                     <div className="text">
                       <h2 className="mb-0">
-                        <a href="car-details.html">{rowcar.carName}</a>
+                        <a onClick={() => {
+                            history.push({
+                              pathname: "/car-details",
+                              state: { carRow },
+                            })
+                          }}>{rowcar.carName}</a>
                       </h2>
                       <div className="d-flex mb-3">
                         <span className="cat">{rowcar.companyName}</span>
