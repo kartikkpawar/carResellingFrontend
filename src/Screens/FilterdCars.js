@@ -67,13 +67,18 @@ const FilterCars = () => {
                   <div className="col-md-4" key={idx}>
                     <div className="car-wrap rounded ">
                       <img
-                        src={`http://localhost:8000/api/car/${car._id}/photo`}
+                        src={`https://carreselling-server.herokuapp.com/api/car/${car._id}/photo`}
                         className="img rounded d-flex align-items-end"
                         alt=""
                       />
                       <div className="text">
                         <h2 className="mb-0">
-                          <a href="car-details.html">{car.carName}</a>
+                          <a onClick={() => {
+                            history.push({
+                              pathname: "/car-details",
+                              state: { carRow, car },
+                            });
+                          }}>{car.carName}</a>
                         </h2>
                         <div className="d-flex mb-3">
                           <span className="cat">{car.companyName}</span>
