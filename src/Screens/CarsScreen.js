@@ -72,7 +72,12 @@ const Cars = () => {
                       />
                       <div className="text">
                         <h2 className="mb-0">
-                          <a href="car-details.html">{car.carName}</a>
+                          <a onClick={() => {
+                            history.push({
+                              pathname: "/car-details",
+                              state: { carRow, car },
+                            })
+                          }}>{car.carName}</a>
                         </h2>
                         <div className="d-flex mb-3">
                           <span className="cat">{car.companyName}</span>
