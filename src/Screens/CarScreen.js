@@ -175,7 +175,7 @@ const CarScreen = () => {
                   <div className="img rounded">
                     {" "}
                     <img
-                      src={`http://localhost:8000/api/car/${carInfo?._id}/photo`}
+                      src={`https://carreselling-server.herokuapp.com/api/car/${carInfo?._id}/photo`}
                       className="img rounded d-flex align-items-end"
                       alt=""
                     />
@@ -688,7 +688,7 @@ const CarScreen = () => {
                 <div className="col-md-4" key={idx}>
                   <div className="car-wrap rounded ">
                     <img
-                      src={`http://localhost:8000/api/car/${rowcar._id}/photo`}
+                      src={`https://carreselling-server.herokuapp.com/api/car/${rowcar._id}/photo`}
                       className="img rounded d-flex align-items-end"
                       alt=""
                     />
