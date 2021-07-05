@@ -73,12 +73,20 @@ const FilterCars = () => {
                       />
                       <div className="text">
                         <h2 className="mb-0">
-                          <a onClick={() => {
-                            history.push({
-                              pathname: "/car-details",
-                              state: { carRow, car },
-                            });
-                          }}>{car.carName}</a>
+                          <a
+                            onClick={() => {
+                              history.push({
+                                pathname: "/car-details",
+                                state: { carRow, car },
+                              });
+                            }}
+                            style={{
+                              userSelect: "none",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {car.carName}
+                          </a>
                         </h2>
                         <div className="d-flex mb-3">
                           <span className="cat">{car.companyName}</span>
