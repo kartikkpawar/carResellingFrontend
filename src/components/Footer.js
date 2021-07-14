@@ -14,8 +14,7 @@ const Footer = () => {
                 </a>
               </h2>
               <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts.
+              CarBook is India’s largest online B2B marketplace, connecting buyers with suppliers.
               </p>
               <ul className='ftco-footer-social list-unstyled float-md-left float-lft mt-5'>
                 <li className='ftco-animate'>

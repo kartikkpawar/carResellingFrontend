@@ -63,9 +63,9 @@ const BuyerListBids = () => {
               <th scope="col" className="text-center">
                 Delete Bid
               </th>
-              <th scope="col" className="text-center">
+              {/* <th scope="col" className="text-center">
                 Visit car
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -80,7 +80,7 @@ const BuyerListBids = () => {
                 <td className="text-center" onClick={() => deleteBid(bid._id)}>
                   <BiTrash style={{ color: "#E21717", fontSize: "1.5rem" }} />
                 </td>
-                <td
+                {/* <td
                   className="text-center"
                   onClick={() =>
                     history.push({
@@ -92,7 +92,7 @@ const BuyerListBids = () => {
                   <BiNavigation
                     style={{ color: "#00D84A", fontSize: "1.5rem" }}
                   />
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

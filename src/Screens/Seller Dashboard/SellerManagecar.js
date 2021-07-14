@@ -82,9 +82,7 @@ const SellerManagecar = () => {
                 <th scope="col" className="text-center">
                   Delete
                 </th>
-                <th scope="col" className="text-center">
-                  Visit
-                </th>
+                
               </tr>
             </thead>
 

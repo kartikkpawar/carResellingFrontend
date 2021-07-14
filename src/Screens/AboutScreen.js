@@ -46,20 +46,10 @@ const AboutScreen = () => {
                   <h2 className="mb-4">Welcome to Carbook</h2>
 
                   <p>
-                    A small river named Duden flows by their place and supplies
-                    it with the necessary regelialia. It is a paradisematic
-                    country, in which roasted parts of sentences fly into your
-                    mouth.
+                  CarBook is India’s largest online B2B marketplace, connecting buyers with suppliers.CarBook has launched many innovative features to ensure that users get an immersive experience of the car model before visiting a dealer showroom.
                   </p>
                   <p>
-                    On her way she met a copy. The copy warned the Little Blind
-                    Text, that where it came from it would have been rewritten a
-                    thousand times and everything that was left from its origin
-                    would be the word "and" and the Little Blind Text should
-                    turn around and return to its own, safe country. A small
-                    river named Duden flows by their place and supplies it with
-                    the necessary regelialia. It is a paradisematic country, in
-                    which roasted parts of sentences fly into your mouth.
+                  CarBook is India's leading car search venture that helps users buy cars that are right for them. Its website and app carry rich automotive content such as expert reviews, detailed specs and prices, comparisons as well as videos and pictures of all car brands and models available in India. The company has tie-ups with many auto manufacturers, more than 4000 car dealers and numerous financial institutions to facilitate the purchase of vehicles.
                   </p>
                   <p>
                     <a href="/cars" className="btn btn-primary py-3 px-4">
@@ -107,7 +97,7 @@ const AboutScreen = () => {
                       <div
                         className="user-img mb-2"
                         style={{
-                          backgroundImage: `url(assets/images/person_1.jpg)`,
+                          backgroundImage: `url(assets/images/person_4.jpg)`,
                         }}
                       ></div>
                       <div className="text pt-4">
@@ -116,49 +106,12 @@ const AboutScreen = () => {
                           countries Vokalia and Consonantia, there live the
                           blind texts.
                         </p>
-                        <p className="name">Roger Scott</p>
-                        <span className="position">Marketing Manager</span>
+                        <p className="name">Prasad Patil</p>
+                        <span className="position">MERN Stack Developer</span>
                       </div>
                     </div>
                   </div>
-                  <div className="item">
-                    <div className="testimony-wrap rounded text-center py-4 pb-5">
-                      <div
-                        className="user-img mb-2"
-                        style={{
-                          backgroundImage: `url(assets/images/person_2.jpg)`,
-                        }}
-                      ></div>
-                      <div className="text pt-4">
-                        <p className="mb-4">
-                          Far far away, behind the word mountains, far from the
-                          countries Vokalia and Consonantia, there live the
-                          blind texts.
-                        </p>
-                        <p className="name">Roger Scott</p>
-                        <span className="position">Interface Designer</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="item">
-                    <div className="testimony-wrap rounded text-center py-4 pb-5">
-                      <div
-                        className="user-img mb-2"
-                        style={{
-                          backgroundImage: `url(assets/images/person_3.jpg)`,
-                        }}
-                      ></div>
-                      <div className="text pt-4">
-                        <p className="mb-4">
-                          Far far away, behind the word mountains, far from the
-                          countries Vokalia and Consonantia, there live the
-                          blind texts.
-                        </p>
-                        <p className="name">Roger Scott</p>
-                        <span className="position">UI Designer</span>
-                      </div>
-                    </div>
-                  </div>
+
                   <div className="item">
                     <div className="testimony-wrap rounded text-center py-4 pb-5">
                       <div
@@ -173,11 +126,32 @@ const AboutScreen = () => {
                           countries Vokalia and Consonantia, there live the
                           blind texts.
                         </p>
-                        <p className="name">Roger Scott</p>
+                        <p className="name">Chaitanya Shinde</p>
                         <span className="position">Web Developer</span>
                       </div>
                     </div>
                   </div>
+
+                  <div className="item">
+                    <div className="testimony-wrap rounded text-center py-4 pb-5">
+                      <div
+                        className="user-img mb-2"
+                        style={{
+                          backgroundImage: `url(assets/images/person_4.jpg)`,
+                        }}
+                      ></div>
+                      <div className="text pt-4">
+                        <p className="mb-4">
+                          Far far away, behind the word mountains, far from the
+                          countries Vokalia and Consonantia, there live the
+                          blind texts.
+                        </p>
+                        <p className="name">Swapnil Nyadhe</p>
+                        <span className="position">Web Developer</span>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="item">
                     <div className="testimony-wrap rounded text-center py-4 pb-5">
                       <div
@@ -192,8 +166,28 @@ const AboutScreen = () => {
                           countries Vokalia and Consonantia, there live the
                           blind texts.
                         </p>
-                        <p className="name">Roger Scott</p>
-                        <span className="position">System Analyst</span>
+                        <p className="name">Tejas Saindane</p>
+                        <span className="position">Frontend Developer</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="item">
+                    <div className="testimony-wrap rounded text-center py-4 pb-5">
+                      <div
+                        className="user-img mb-2"
+                        style={{
+                          backgroundImage: `url(assets/images/person_1.jpg)`,
+                        }}
+                      ></div>
+                      <div className="text pt-4">
+                        <p className="mb-4">
+                          Far far away, behind the word mountains, far from the
+                          countries Vokalia and Consonantia, there live the
+                          blind texts.
+                        </p>
+                        <p className="name">Kartik Pawar</p>
+                        <span className="position">MERN Stack Developer</span>
                       </div>
                     </div>
                   </div>

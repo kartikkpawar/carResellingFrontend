@@ -79,6 +79,9 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage, renderVal }) => {
         <td className="text-center">{car.carName}</td>
         <td className="text-center">{car.variant}</td>
         <td className="text-center">
+          <Currency quantity={car.cost} currency="INR" />
+        </td>
+        <td className="text-center">
           <span
             className={`btn ${car.sold ? "btn-danger" : "btn-success"}`}
             onClick={() => {
@@ -95,9 +98,7 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage, renderVal }) => {
             )}
           </span>
         </td>
-        <td className="text-center">
-          <Currency quantity={car.cost} currency="INR" />
-        </td>
+        
         <td className="text-center">
           <BiEdit
             style={{ color: "#1089ff", fontSize: "1.5rem" }}
@@ -113,9 +114,9 @@ const YouCarTableRow = ({ car, idx, openModal, reRenderPage, renderVal }) => {
             }}
           />
         </td>
-        <td className="text-center">
+        {/* <td className="text-center">
           <BiNavigation style={{ color: "#00D84A", fontSize: "1.5rem" }} />
-        </td>
+        </td> */}
       </tr>
       <Modal
         aria-labelledby="transition-modal-title"
